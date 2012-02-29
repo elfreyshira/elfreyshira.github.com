@@ -1,5 +1,4 @@
 
-
 function showChapter() {
 	document.getElementById("verse").innerHTML = "Luke 6:31";
 }
