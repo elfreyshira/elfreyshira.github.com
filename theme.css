@@ -16,9 +16,14 @@ body {
 a:link, a:visited {
   text-decoration: none;
   color: #444488;
+  /*-webkit-transition: color 1.2s linear; 
+  -moz-transition: color 1.2s linear;
+  -o-transition: color 1.2s linear;
+  transition: :color 1.2s linear;*/
 }
 a:hover {
   color: #5555dd;
+  
 }
 
 header {
