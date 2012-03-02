@@ -23,6 +23,7 @@ a:hover {
 
 header {
   width: 100%;
+  min-width: 630px;
   height: 176px;
   overflow: hidden;
   background-image: url(images/greece.png);
