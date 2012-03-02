@@ -5,11 +5,20 @@
 
 html {  
   font-family: "MS Trebuchet", Arial, sans-serif;
+  color: #444444;
 }
 
 body {
   background: #f6eff9 url(images/box.png) repeat;
   /*scroll/fixed top left/top center/top right/center left/center center/center right/bottom left/bottom center/bottom right/x-% y-%/x-pos y-pos;*/
+}
+
+a:link, a:visited {
+  text-decoration: none;
+  color: #444488;
+}
+a:hover {
+  color: #5555dd;
 }
 
 header {
@@ -30,7 +39,7 @@ header {
   margin: 20px auto 0 auto;
 }
 
-.content {
+.bg {
   text-align: center;
   float: left;
   margin: 5px;
@@ -40,24 +49,28 @@ header {
   -moz-opacity: 0.5;
   filter:alpha(opacity=5);
 }
+  #professional { background-color: #ffecdd; }
+  .bg.social { background-color: #ecddff; }
+  #personal { background-color: #ddffdd; }
 
-.inside {
+.content {
   position: relative;
   float: left;
-  margin-left: -200px;
+  margin-left: -205px;
   width: 200px;
-}
-.content h2 {
-  margin: 5px;
+  height: 400px;
 }
 
-#professional {
-  background-color: #ddddff;
-}
+  .content h2 {
+    text-align: center;
+    padding: 10px
+  }
+  .content ul {
+    list-style-type: none;
+    text-align: center;
+  }
+    .content ul li {
+      margin: 4px 0 4px 0;
+    }
 
-#social {
-  background-color: #ffdddd;
-}
-#personal {
-  background-color: #ddffdd;
-}
+
