@@ -33,6 +33,7 @@ header {
 #my-name {
   text-align: center;
   font-size: 50px;
+  min-width: 630px;
 }
 
 #container {
