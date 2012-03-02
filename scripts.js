@@ -6,7 +6,7 @@ $(document).ready(function() {
     function() {
       var col = $(this).attr("class").split(" ")[1];
       var change_class = ".bg."+col;
-      $(change_class).css("opacity","0.7");
+      $(change_class).css("opacity","0.8");
     },
     function() {
       var col = $(this).attr("class").split(" ")[1];
