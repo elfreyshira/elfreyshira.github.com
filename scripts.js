@@ -2,7 +2,15 @@ $(document).ready(function() {
 
   $("a").attr("target", "_blank");
 
-  $(".content").mouseover(function() {
-    $(this).attr("class")
-  });
+  $(".content").hover(
+    function() {
+      var col = $(this).attr("class").split(" ")[1];
+      var change_class = ".bg."+col;
+      $(change_class).css("opacity","0.7");
+    },
+    function() {
+      var col = $(this).attr("class").split(" ")[1];
+      var change_class = ".bg."+col;
+      $(change_class).css("opacity","0.4");
+    });
 });

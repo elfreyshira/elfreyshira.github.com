@@ -45,13 +45,13 @@ header {
   margin: 5px;
   height: 400px;
   width: 200px;
-  opacity: 0.5;
-  -moz-opacity: 0.5;
-  filter:alpha(opacity=5);
+  opacity: 0.3;
+  -moz-opacity: 0.3;
+  filter:alpha(opacity=3);
 }
-  #professional { background-color: #ffecdd; }
+  .bg.professional { background-color: #ffecdd; }
   .bg.social { background-color: #ecddff; }
-  #personal { background-color: #ddffdd; }
+  .bg.personal { background-color: #ddffdd; }
 
 .content {
   position: relative;
@@ -63,9 +63,11 @@ header {
 
   .content h2 {
     text-align: center;
-    padding: 10px
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
   }
   .content ul {
+    margin-top: 20px;
     list-style-type: none;
     text-align: center;
   }
