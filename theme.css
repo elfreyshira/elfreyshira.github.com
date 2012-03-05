@@ -4,7 +4,8 @@
 }
 
 html {  
-  font-family: "MS Trebuchet", Arial, sans-serif;
+  font-family: "Josefin Sans","MS Trebuchet", Arial, sans-serif;
+  font-size: 18px;
   color: #444444;
 }
 
@@ -37,12 +38,12 @@ header {
 
 #my-name {
   text-align: center;
-  font-size: 50px;
+  font-size: 60px;
   min-width: 630px;
 }
 
 #container {
-  width: 630px;
+  width: 636px;
   margin: 20px auto 0 auto;
 }
 
@@ -52,26 +53,50 @@ header {
   margin: 5px;
   height: 400px;
   width: 200px;
+  border: 1px solid #999;
   opacity: 0.3;
   -moz-opacity: 0.3;
   filter:alpha(opacity=3);
 }
-  .bg.professional { background-color: #ffecdd; }
-  .bg.social { background-color: #ecddff; }
-  .bg.personal { background-color: #ddffdd; }
+  .bg.professional {
+    background-color: #ffecdd;
+    border-color: #cdbeb2;
+  }
+  .bg.social {
+    background-color: #ecddff;
+    border-color:#beb2cd;
+  }
+  .bg.personal {
+    background-color: #ddffdd;
+    border-color: #b1ccb1;
+  }
+
+.bg_img {
+  position: relative;
+  float: left;
+  margin-left: -206px;
+  margin-top: 54px;
+  width: 200px;
+  height: 348px;
+  opacity: 0.5;
+  -moz-opacity: 0.5;
+  filter:alpha(opacity=5);
+}
 
 .content {
   position: relative;
   float: left;
-  margin-left: -205px;
+  margin-left: -206px;
+  margin-top: 6px;
   width: 200px;
   height: 400px;
 }
 
   .content h2 {
     text-align: center;
+    height: 28px;
     padding: 10px;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #ccc;
   }
   .content ul {
     margin-top: 20px;
