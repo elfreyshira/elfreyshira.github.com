@@ -1,9 +1,18 @@
 $(document).ready(function() {
 
+
+  // load all content images on page load so that the image doesn't have to load when hovering over links
+  $(".content a").each(function(){
+    var link_text = $(this).text().split(" ").join("");
+    $("body").append("<img src='images/"+link_text+".png' class='hidden' />");
+  });
+
+  // make all links open in a new tab
   $("a").attr("target", "_blank");
 
   // alert($(".content.social h2").height());
 
+  // helper function where given a content class, find the other two classes
   var get_first_and_second = function(this_content) {
     var all_contents = ["social","professional","personal"];
     var indexes;

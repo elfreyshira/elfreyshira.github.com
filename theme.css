@@ -83,6 +83,10 @@ header {
   filter:alpha(opacity=5);
 }
 
+.hidden {
+  display: none;
+}
+
 .content {
   position: relative;
   float: left;
