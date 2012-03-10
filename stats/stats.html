@@ -11,88 +11,96 @@ elfrey ft
 elfrey as
 -->
 
-<!--       <th> Name </th>
-      <th> Points </th> 0
-      <th> Shots Made </th> 1
-      <th> Shots Attempted </th> 2
-      <th> FT Made </th> 3
-      <th> FT Attempted </th> 4
-      <th> Assists </th> 5
-      <th> Rebounds </th> 6
-      <th> Blocks </th> 7
-      <th> Steals </th> 8
-      <th> Turnovers </th> 9 -->
+<!--  0   Name
+      1   Points
+      2   Shots Made
+      3   Shots Attempted
+      4   FT Made
+      5   FT Attempted
+      6   Assists
+      7   Rebounds
+      8   Blocks
+      9   Steals
+      10  Turnovers -->
 
 <html>
 <head>
   <title> Easy Basketball Stats </title>
+
+  <link rel="stylesheet" style="text/css" href="theme.css"/>
+
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js">
   </script>
   <script type="text/javascript">
-    // $(document).ready(function(){
-      undo = "";
-      function changeStats(){
-        var str = $("#input_text").val();
-        $("#input_text").select();
-        var str_split = str.split(" ");
-        if (str_split.length != 2){
-          return false
-        }
-        var name = str_split[0].toLowerCase();
-        var action = str_split[1].toLowerCase();
-
-        var arr = [0,0,0,0,0,0,0,0,0,0];
-        if      (action == "miss" || action[0]=="m"){ arr[2] += 1; }
-        else if (action == "block"|| action[0]=="b"){ arr[7] += 1; }
-        else if (action == "to"|| action[0]=="t"){ arr[9] += 1; }
-        else if (action == "rebound"|| action[0]=="r"){ arr[6] += 1; }
-        else if (action == "steal"|| action[0]=="s"){ arr[8] += 1; }
-        else if (action == "as" || action[0]=="a"){ arr[5] += 1; }
-
-        else if (action == "2" || action == "3"){
-          arr[0] += parseInt(action);
-          arr[1] += 1;
-          arr[2] += 1;
-        }
-        else if (action == "ft"){
-          arr[0] += 1;
-          arr[3] += 1;
-          arr[4] += 1;
-        }
-        else if (action == "ftmiss"){
-          arr[4] += 1;
-        }
-        else {
-          return false;
-        }
-
-
-        var rows = ["name","points","shots_made","shots_attempted","ft_made","ft_attempted","assists","rebounds",
-                    "blocks","steals","turnovers"];
-
-        var row = $("#"+name);
-        if (row.html() == null){
-          // $("#stats_table").append("<p> Hello World! </p>");
-          var new_row = "<tr id='"+name+"'> <td class='"+rows[0]+"'>"+name+"</td>";
-          for (var i = 1; i < rows.length; i++) {
-            new_row += "\n <td class='"+rows[i]+"'>"+arr[i-1]+"</td>";
-          };
-          new_row += "\n </tr>";
-          $("#stats_table").append(new_row);
-        }
-        else {
-          for (var i = 1; i < rows.length; i++) {
-            var selection = "#"+name+" ."+rows[i]
-            var previous = $(selection).html();
-            $(selection).html(String(parseInt(previous)+arr[i-1]));
-          };
-        }
-
+    undo = "";
+    function changeStats(){
+      var str = $("#input_text").val();
+      $("#input_text").select();
+      var str_split = str.split(" ");
+      if (str_split.length != 2){
+        return false
       }
-      
-    // });
+      var name = str_split[0].toLowerCase();
+      var action = str_split[1].toLowerCase();
+
+      var arr = [0,0,0,0,0,0,0,0,0,0,0];
+      if      (action[0]=="m"){ arr[2] += 1; }    // miss
+      else if (action[0]=="b"){ arr[7] += 1; }    // block
+      else if (action[0]=="t"){ arr[9] += 1; }    // turnover
+      else if (action[0]=="r"){ arr[6] += 1; }    // rebound
+      else if (action[0]=="s"){ arr[8] += 1; }    // steal
+      else if (action[0]=="a"){ arr[5] += 1; }    // assists
+      else if (action=="foul"){ arr[10] += 1; }//fouls
+
+      else if (action == "2" || action == "3"){
+        arr[0] += parseInt(action);
+        arr[1] += 1;
+        arr[2] += 1;
+      }
+      else if (action == "ft"){
+        arr[0] += 1;
+        arr[3] += 1;
+        arr[4] += 1;
+      }
+      else if (action == "ftmiss"){
+        arr[4] += 1;
+      }
+      else {
+        return false;
+      }
+
+      // updates the latest action
+      $("#latest").html(name+" "+action);
+
+
+      var rows = ["name","points","shots_made","shots_attempted","ft_made","ft_attempted","assists","rebounds",
+                  "blocks","steals","turnovers", "fouls"];
+
+      var row = $("#"+name);
+      if (row.html() == null){
+        // $("#stats_table").append("<p> Hello World! </p>");
+        var new_row = "<tr id='"+name+"'> <td class='"+rows[0]+"'>"+name+"</td>";
+        for (var i = 1; i < rows.length; i++) {
+          new_row += "\n <td class='"+rows[i]+"'>"+arr[i-1]+"</td>";
+        };
+        new_row += "\n </tr>";
+        $("#stats_table").append(new_row);
+      }
+      else {
+        for (var i = 1; i < rows.length; i++) {
+          var selection = "#"+name+" ."+rows[i]
+          var previous = $(selection).html();
+          $(selection).html(String(parseInt(previous)+arr[i-1]));
+        };
+      }
+
+    }
+    
   </script>
 </head>
+<header>
+  <h1> Easy Basketball Stats </h1>
+</header>
 <body>
   <p>
     The purpose of this site is to make it easy for you to keep track of basketball stats during a game. <br/>
@@ -113,11 +121,13 @@ elfrey as
     "name <b>b</b>lock" -> got a block <br/>
     "name <b>s</b>teal" -> got a steal <br/>
     "name <b>t</b>urnover" -> committed a turnover <br/>
+    "name <b>foul</b>" -> committed a foul <br/>
   </p>
   <form action="" onsubmit="changeStats(); return false;">
     <input type="text" id="input_text">
     <input type="submit" value="Submit">
   </form>
+  <p> Latest action: <span id="latest"></span> </p>
 
   <table id="stats_table" border="1">
     <tr>
@@ -132,6 +142,7 @@ elfrey as
       <th> Blocks </th>
       <th> Steals </th>
       <th> Turnovers </th>
+      <th> Fouls </th>
     </tr><!-- 
     <tr id="elfrey">
       <td class="name"> Elfrey </td>
