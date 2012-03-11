@@ -33,31 +33,41 @@ elfrey as
   </script>
   <script type="text/javascript" src="scripts.js"> </script>
 </head>
-<header>
-  <h1> Easy Basketball Stats </h1>
-</header>
+<header></header>
 <body>
-  <p>
-    The purpose of this site is to make it easy for you to keep track of basketball stats during a game. <br/>
-    When a player does something, type in their name and action in the input below.
-    Don't leave this page if you want to keep your stats.<br/>
-    Follow this format: <b>name action</b> <br/>
-    Shortcuts are allowed. For example, typing in "elfrey b" means that the player named elfrey will be added one block.
-    <br/>
-    However, you can't have any spaces for the name. So either put only their first name or take out the spaces. <br/>
-    <br/>
-    "name <b>2</b>" -> made a two pointer<br/>
-    "name <b>3</b>" -> made a three pointer <br/>
-    "name <b>m</b>iss" -> missed a shot<br/>
-    "name <b>ft</b>" -> made a free throw <br/>
-    "name <b>ftmiss</b>" -> missed a free throw <br/>
-    "name <b>a</b>ssist" -> got an assist <br/>
-    "name <b>r</b>ebound" -> got a rebound <br/>
-    "name <b>b</b>lock" -> got a block <br/>
-    "name <b>s</b>teal" -> got a steal <br/>
-    "name <b>t</b>urnover" -> committed a turnover <br/>
-    "name <b>foul</b>" -> committed a foul <br/>
-  </p>
+  <div id="info">
+    <div id="key">
+      <p>
+        <!-- The purpose of this site is to make it easy for you to keep track of basketball stats during a game. <br/>
+        When a player does something, type in their name and action in the input below.
+        Don't leave this page if you want to keep your stats.<br/>
+        Follow this format: <b>name action</b> <br/>
+        Shortcuts are allowed. For example, typing in "elfrey b" means that the player named elfrey will be added one block.
+        <br/>
+        However, you can't have any spaces for the name. So either put only their first name or take out the spaces. <br/>
+        <br/> -->
+        "name <b>2</b>" -> made a two pointer<br/>
+        "name <b>3</b>" -> made a three pointer <br/>
+        "name <b>m</b>iss" -> missed a shot<br/>
+        "name <b>ft</b>" -> made a free throw <br/>
+        "name <b>ftmiss</b>" -> missed a free throw <br/>
+        "name <b>a</b>ssist" -> got an assist <br/>
+        "name <b>r</b>ebound" -> got a rebound <br/>
+        "name <b>b</b>lock" -> got a block <br/>
+        "name <b>s</b>teal" -> got a steal <br/>
+        "name <b>t</b>urnover" -> committed a turnover <br/>
+        "name <b>foul</b>" -> committed a foul <br/>
+      </p>
+    </div>
+    <div id="history">
+      <p> Action History </p>
+      <ul id="history_list">
+      </ul>
+    </div>
+    <div id="about">
+      <p> it's about me </p>
+    </div>
+  </div>
   <form action="" onsubmit="changeStats(); return false;">
     <input type="text" id="input_text">
     <input type="submit" value="Submit">

@@ -45,6 +45,8 @@ function changeStats(){
     function() {
       $(this).html(name+" "+action).animate({opacity: 1.0}, "fast");
     });
+  // update history
+  $("#history_list").prepend("<li>"+str+"</li>");
 
 
   var rows = ["name","points","shots_made","shots_attempted","ft_made","ft_attempted","assists","rebounds",

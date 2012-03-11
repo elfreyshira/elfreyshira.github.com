@@ -1,4 +1,46 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
 html {
   background-color: #222222;
   color: #eeeeee;
+  font-size: 16px;
+}
+
+body {
+  margin: 15px 15px;
+}
+
+header {
+  width: 363px;
+  height: 125px;
+  background-image: url("header.png");
+  margin: 0 auto 0 auto;
+  border: 2px solid #fff;
+  -moz-border-radius: 25px;
+  border-radius: 25px;
+}
+
+b {
+  color: #fbcb8e;
+}
+
+#info {
+  margin: 15px 0 15px 0;
+  min-width: 800px;
+  height: 220px;
+  background-color: none;
+}
+#info div {
+  display: inline;
+  float: left;
+  width: 33%;
+}
+
+#history_list {
+  max-height: 180px;
+  margin-left: 20px;
+  overflow: auto;
 }
