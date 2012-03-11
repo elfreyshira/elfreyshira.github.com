@@ -6,11 +6,20 @@
 html {
   background-color: #222222;
   color: #eeeeee;
-  font-size: 16px;
+  font-size: 14px;
+  font-family: sans-serif;
 }
 
 body {
   margin: 15px 15px;
+}
+
+a, a:visited {
+  color: #8c9bfc;
+  text-decoration: none;
+}
+a:hover {
+  color: #d98cfc;
 }
 
 header {
@@ -31,7 +40,8 @@ b {
 #info {
   margin: 15px 0 15px 0;
   min-width: 850px;
-  height: 220px;
+  max-height: 240px;
+  overflow: auto;
   background-color: none;
 }
   #info div {
@@ -49,3 +59,7 @@ b {
   #history_list img {
     margin-right: 4px;
   }
+
+#about p {
+  font-size: 12px;
+}

@@ -27,6 +27,8 @@ elfrey as
 <head>
   <title> Easy Basketball Stats </title>
 
+  <link rel="shortcut icon" href="favicon.ico"/>
+
   <link rel="stylesheet" style="text/css" href="theme.css"/>
 
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js">
@@ -65,14 +67,22 @@ elfrey as
       </ul>
     </div>
     <div id="about">
-      <p> it's about me </p>
+      <p>
+        Easy Basketball Stats is created by <a href="http://elfreyshira.tk" target="_blank">Elfrey Shira</a>.
+        One day, he and his friend decided to keep stats for an intramural basketball game they were supporting at UT Austin.
+        They found it difficult to keep up with Google Docs as they had to keep looking up and down to locate, calculate, and alter
+        a specific stat for each action for each player. Elfrey's friend wishfully exclaimed, "I wish I could just type in
+        something like 'elfrey rebound' and would add it for me". Elfrey half-jokingly responded, "I'll just program one!"
+        Later that night, the idea kept festering until he sat down for 2 hours and made a prototype.
+        After a couple trial runs, several extra hours, and lost homework time, the end result is what you see today:
+        Easy Basketball Stats.
+      </p>
     </div>
   </div>
   <form action="" onsubmit="addStats(); return false;">
     <input type="text" id="input_text">
     <input type="submit" value="Submit">
   </form>
-  <p> Latest action: <span id="latest"></span> </p>
 
   <table id="stats_table" border="1">
     <tr>

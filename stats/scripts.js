@@ -6,7 +6,11 @@ function addStats() {
 }
 
 function deleteStats(str, id_count) {
-  $("#"+id_count).remove();
+  var deleted = $("#"+id_count);
+  deleted.animate({opacity:0.0},"fast",
+    function() {
+      $(this).remove();
+    });
   changeStats(str, "delete");
 }
 
@@ -17,6 +21,7 @@ function changeStats(str, change){
 
   var str_split = str.split(" ",2);
   if (str_split.length != 2){
+    $("#input_text").val(str).select();
     return false
   }
   var name = str_split[0].toLowerCase();
@@ -58,19 +63,15 @@ function changeStats(str, change){
     $("#input_text").val(str).select();
   }
 
-  if (change=="add") {
+  else if (change=="add") {
     // put the name back into the input text so that it's easy to go to the next action if it's the same person
     $("#input_text").val(name+" ").select();
 
-    // updates the latest action
-    $("#latest").animate({opacity: 0.0}, "fast",
-      function() {
-        $(this).html(name+" "+action).animate({opacity: 1.0}, "fast");
-      });
     // update history
     var onclick_str = "onClick = \"deleteStats('"+str+"'"+", "+history_count+"); return false;\"";
     $("#history_list").prepend(
       "<li id='"+history_count+"'><a href='' "+onclick_str+"><img src='delete.png'/></a>"+name+" "+action+"</li>");
+    $("#"+history_count).hide().fadeIn();
     history_count += 1;
   }
 
@@ -81,7 +82,7 @@ function changeStats(str, change){
 
   var row = $("#"+name);
   if (row.html() == null){
-    // $("#stats_table").append("<p> Hello World! </p>");
+    // $("#stats_table").append("<p> Hello Worlds! </p>");
     var new_row = "<tr id='"+name+"'> <td class='"+rows[0]+"'>"+name+"</td>";
     for (var i = 1; i < rows.length; i++) {
       new_row += "\n <td class='"+rows[i]+"'>"+arr[i-1]+"</td>";
