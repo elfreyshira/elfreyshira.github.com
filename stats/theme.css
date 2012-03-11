@@ -40,7 +40,7 @@ b {
 #info {
   margin: 15px 0 15px 0;
   min-width: 850px;
-  max-height: 240px;
+  height: 240px;
   overflow: auto;
   background-color: none;
 }

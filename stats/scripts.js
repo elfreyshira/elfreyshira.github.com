@@ -89,13 +89,23 @@ function changeStats(str, change){
     };
     new_row += "\n </tr>";
     $("#stats_table").append(new_row);
+    $("#"+name).hide().fadeIn();
   }
   else {
+    var zero_check = 0; //to check to see if deleting a stat will put a player at all 0. in that case, delete the row.
     for (var i = 1; i < rows.length; i++) {
       var selection = "#"+name+" ."+rows[i]
       var previous = $(selection).html();
-      $(selection).html(String(parseInt(previous)+arr[i-1]));
+      var new_value = parseInt(previous)+arr[i-1]
+      zero_check += new_value;
+      $(selection).html(String(new_value));
     };
+    if (zero_check == 0){
+      row.animate({opacity: 0.0},"fast",
+        function() {
+          $(this).remove();
+        });
+    }
   }
 
 }
