@@ -104,7 +104,8 @@ function changeStats(str, change){
       row.animate({opacity: 0.0},"fast",
         function() {
           $(this).remove();
-        });
+        }
+      );
     }
   }
 
