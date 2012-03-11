@@ -27,20 +27,25 @@ b {
   color: #fbcb8e;
 }
 
+
 #info {
   margin: 15px 0 15px 0;
-  min-width: 800px;
+  min-width: 850px;
   height: 220px;
   background-color: none;
 }
-#info div {
-  display: inline;
-  float: left;
-  width: 33%;
-}
+  #info div {
+    margin: 0 1%;
+    /*display: inline;*/
+    float: left;
+    width: 31%;
+  }
 
 #history_list {
   max-height: 180px;
   margin-left: 20px;
   overflow: auto;
 }
+  #history_list img {
+    margin-right: 4px;
+  }
