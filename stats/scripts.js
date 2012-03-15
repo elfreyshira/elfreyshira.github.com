@@ -70,7 +70,8 @@ function changeStats(str, change){
     // update history
     var onclick_str = "onClick = \"deleteStats('"+str+"'"+", "+history_count+"); return false;\"";
     $("#history_list").prepend(
-      "<li id='"+history_count+"'><a href='' "+onclick_str+"><img src='delete.png'/></a>"+name+" "+action+"</li>");
+      "<li id='"+history_count+"'><a href='' "+onclick_str+" title='delete action'><img src='delete.png'/></a>"+
+      name+" "+action+"</li>");
     $("#"+history_count).hide().fadeIn();
     history_count += 1;
   }
