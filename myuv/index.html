@@ -2,36 +2,42 @@
 
 <head>
   <title> Myuv: Movie Ratings Quickly </title>
+  <link rel="stylesheet" type="text/css" href="theme.css">
+  <script type="text/javascript" src="../jquery-1.7.1.min.js"></script>
+  <script type="text/javascript" src="scripts.js"></script>
 
-  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-  <script>
-  //   $(document).ready( function() {
-  //     $.ajax({
-  //       url: "http://www.imdbapi.com/?i=&t=inception",
-  //       dataType: 'jsonp',
-  //       success: function(data){
-  //         var t = data.Title;
-  //         alert("first: "+t);
-  //       }
-  //     });
-  //     $.ajax({
-  //       url:"http://api.rottentomatoes.com/api/public/v1.0/movies.json?apikey=f278acux2dr8vmmueege9bfv&q=inception",
-  //       dataType: 'jsonp',
-  //       success: function(data){
-  //         var t = data.movies[0].title;
-  //         alert("second: "+t);
-  //       }
-  //     });
-  //   });
-  // </script>
 </head>
 <body>
+  <header></header>
+  <div class="search_div">
+    <form onsubmit="findMovie(); return false;">
+      <input type="text" class="search">
+      <!-- <input type="submit" class="search_submit" value=""> -->
+    </form>
+  </div>
+  <div class="outputs">
+    <div id="inception" class="entry_output">
+      <div class="imdb source">
+      </div>
+      <div class="rt source">
+      </div>
+      <div class="netflix source">
+      </div>
+      <div class="filmcrave source">
+      </div>
+      <p class="movie_title"> Inception </p>
+    </div>
+  </div>
+
+  <!-- <div id="target">
+  </div>
   <p>
     Myuv is a project by <a href="http://elfreyshira.github.com">Elfrey Shira</a> that helps people quickly and
     simply search movie ratings all across movie review sites.
-    I intend to cover ratings taken from RottenTomatoes, IMDB, Netflix, Filmcrave, and other sites.
+    I intend to cover ratings taken from RottenTomatoes, IMDB, Netflix, <a href="http://filmcrave.com">Filmecrave</a>, and other sites.
   </p>
   <p>It is currently in development. Come back later to see the final product. Thanks!</p>
+ -->
 </body>
 
 </html>
