@@ -24,7 +24,7 @@ function check_empty_focus() {
 }
 
 function find_movie() {
-  // fill_output("Inception", ["imdb","rtc","rta"], ["IMDB","Critics","Audience"], ["9.8","50","98 "], ["/ 10","%","%"]);
+  // fill_output("Inception", ["imdb","rtc","rta"], ["IMDB","Critics","Audience"], ["9.4","50","98 "], ["/ 10","%","%"]);
   // return;
 
 
@@ -168,12 +168,13 @@ function fill_output(movie_title, source_classes, source_names, scores, out_of) 
     border_green = parseInt(green/2.0).toString(16);
     border_blue = parseInt(blue/2.0).toString(16);
 
-    red = parseInt(red).toString(16);
+    red = parseInt(red)
+    red = red.toString(16);
     green = parseInt(green).toString(16);
     blue = parseInt(blue).toString(16);
-    if (red.length < 2){ red += "0"; }
-    if (green.length < 2){ green += "0"; }
-    if (blue.length < 2){ blue += "0"; }
+    if (red.length < 2){ red = "0"+red; }
+    if (green.length < 2){ green = "0"+green; }
+    if (blue.length < 2){ blue = "0"+blue; }
 
 
     // set css
