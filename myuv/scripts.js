@@ -1,3 +1,5 @@
+// http://api.themoviedb.org/2.1/
+// http://www.deanclatworthy.com/imdb/
 have_searched = false;
 
 $(document).ready(function() {
@@ -23,6 +25,11 @@ function check_empty_focus() {
   }
 }
 
+
+function make_url_able(str) {
+  return str.replace(/\W|_/g,"+").replace(/\++/g,"+");
+}
+
 function find_movie() {
   // fill_output("Inception", ["imdb","rtc","rta"], ["IMDB","Critics","Audience"], ["9.4","50","98 "], ["/ 10","%","%"]);
   // return;
@@ -30,14 +37,21 @@ function find_movie() {
 
   have_searched = true;
   var title_search = $("#search").val();
-  var title_url = title_search.split(" ").join("+");
+  var title_url = make_url_able(title_search);
 
-  movie_title = false;
+  var movie_title = false;
+  var display_title = false;
   var source_classes = [];
   var source_names = [];
   var scores = [];
   var out_of = [];
+  var year = false;
   var count = 0;
+  var page_limit = "10"; // page limit for rotten tomatoes api
+
+
+
+
 
   // IMDB, class="imdb", out_of="/ 10", score="8.4"
   $.ajax({
@@ -45,12 +59,10 @@ function find_movie() {
     dataType: 'jsonp',
     timeout: 10000,
     success: function(data){
-      movie_title = data.Title;
-      if (!movie_title) {
-        movie_title = false;
-      }
-      else {
-        movie_title = data.Title;
+      if (data.Title) {
+        year = data.Year;
+        movie_title = data.Title
+        display_title = movie_title + " <span class='dem'>(" + year + ")</span>";
         source_classes[count] = "imdb";
         source_names[count] = "IMDB";
         scores[count] = data.Rating;
@@ -59,40 +71,51 @@ function find_movie() {
       }
     },
     error: function(crap){
-      // alert("IMDB fail");
+      // alert("RT fail");
     },
     complete: function() {
       $.ajax({
-        url:"http://api.rottentomatoes.com/api/public/v1.0/movies.json?apikey=f278acux2dr8vmmueege9bfv&q="+title_url,
+        url: "http://api.rottentomatoes.com/api/public/v1.0/movies.json?apikey=f278acux2dr8vmmueege9bfv&page_limit="+
+                                                                                      page_limit+"&q="+title_url,
         dataType: 'jsonp',
         timeout: 10000,
         success: function(data){
-          if (data.total && data.total > 0) {
-            var movie_data = data.movies[0]
+          if (data.total > 0) { //only analyze if there's some returned data
+            var limit = Math.min(data.total, page_limit);
+            for (i = 0; i < limit; i++) {
+              // check to see if the searched title matches the exact json title
+              if (data.movies[i].title == movie_title && data.movies[i].year == year) {
+                break;
+              }
+            };
+            if (i >= limit) {
+              i = 0;
+            }
+
+            var movie_data = data.movies[i];
             if (!movie_title) {
               movie_title = movie_data.title;
+              display_title = movie_title + " <span class='dem'>(" + year + ")</span>";
             }
-            source_classes[count] = "rtc";
-            source_names[count] = "Rotten Tomatoes: Critics";
-            scores[count] = movie_data.ratings.critics_score;
-            out_of[count] = "%";
-            count += 1;
+            if (movie_data.ratings.critics_score >= 0){
+              source_classes[count] = "rtc";
+              source_names[count] = "Rotten Tomatoes: Critics";
+              scores[count] = movie_data.ratings.critics_score;
+              out_of[count] = "%";
+              count += 1;
+            }
             source_classes[count] = "rta";
             source_names[count] = "Rotten Tomatoes: Audience";
             scores[count] = movie_data.ratings.audience_score;
             out_of[count] = "%";
             count += 1;
-
           }
-
-
-          
         },
         error: function(crap){
-          // alert("RT fail");
+          // alert("IMDB fail");
         },
         complete: function() {
-          fill_output(movie_title, source_classes, source_names, scores, out_of);
+          fill_output(display_title, source_classes, source_names, scores, out_of);
         }
 
       });
@@ -101,9 +124,9 @@ function find_movie() {
 
 }
 
-function fill_output(movie_title, source_classes, source_names, scores, out_of) {
+function fill_output(display_title, source_classes, source_names, scores, out_of) {
 
-  if (!movie_title) {
+  if (!display_title) {
     alert("your internet is probably down");
     return;
   }
@@ -135,7 +158,7 @@ function fill_output(movie_title, source_classes, source_names, scores, out_of) 
     }
   };
   final_output += ' \n\
-    <div class="movie_footer"> <p>' + movie_title +'</p> </div> \n\
+    <div class="movie_footer"> <p>' + display_title +'</p> </div> \n\
     </div>';
   var output_html = $(final_output);
 
