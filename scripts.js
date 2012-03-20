@@ -27,7 +27,7 @@ $(document).ready(function() {
   // when you hover over a content link in a box, images pop up in the other two boxes
   $(".content a").hover(
     function() {
-      var link_text = $(this).text().split(" ").join("");
+      var link_text = $(this).text().replace(/\W|_/g,"");
       var this_content = $(this).closest(".content").attr("class").split(" ")[1];
 
       var first_and_second = get_first_and_second(this_content);
