@@ -34,7 +34,7 @@ function changeStats(str, change){
   else if (action[0]=="r"){ arr[6] += m; action = "rebounded";}    // rebound
   else if (action[0]=="s"){ arr[8] += m; action = "got a steal";}    // steal
   else if (action[0]=="a"){ arr[5] += m; action = "got an assist";}    // assists
-  else if (action=="foul"){ arr[10] += m; }//fouls
+  else if (action=="foul"){ arr[10] += m; action = "fouled"; }//fouls
 
   else if (action == "2" || action == "3"){
     arr[0] += m*parseInt(action);
