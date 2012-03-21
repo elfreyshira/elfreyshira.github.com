@@ -3,7 +3,7 @@ $(document).ready(function() {
 
   // load all content images on page load so that the image doesn't have to load when hovering over links
   $(".content a").each(function(){
-    var link_text = $(this).text().split(" ").join("");
+    var link_text = $(this).text().replace(/\W|_/g,"");
     $("body").append("<img src='images/"+link_text+".png' class='hidden' />");
   });
 
