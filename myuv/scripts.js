@@ -30,42 +30,179 @@ function make_url_able(str) {
   return str.replace(/\W|_/g,"+").replace(/\++/g,"+");
 }
 
+
+
+
+
+
+///////////// *************************************** /////////////////////
+///////////// *************************************** /////////////////////
+///////////// *************************************** /////////////////////
+///////////// *************************************** /////////////////////
+
+
+
+
+// function make_ajax_calls(arr, index) {
+//   $.ajax({
+//     url: "http://www.imdbapi.com/?t="+title_url,
+//     dataType: 'jsonp',
+//     timeout: 10000,
+//     success: function(data){
+//       if (data.Title) {
+//         year = data.Year;
+//         movie_title = data.Title;
+//         display_title = movie_title + " <span class='dem'>(" + year + ")</span>";
+//         source_classes[count] = "imdb";
+//         source_names[count] = "IMDB";
+//         scores[count] = data.Rating;
+//         out_of[count] = "/ 10";
+//         count += 1;
+//       }
+//     },
+//     error: function(crap){
+//       // alert("RT fail");
+//     },
+//     complete: function() {}
+//   });
+// }
+
+
+
+
 function find_movie() {
-  // fill_output("Inception", ["imdb","rtc","rta"], ["IMDB","Critics","Audience"], ["9.4","50","98 "], ["/ 10","%","%"]);
-  // return;
 
 
   have_searched = true;
-  var title_search = $("#search").val();
-  var title_url = make_url_able(title_search);
+  title_search = $("#search").val();
+  title_url = make_url_able(title_search);
 
-  var movie_title = false;
-  var display_title = false;
-  var source_classes = [];
-  var source_names = [];
-  var scores = [];
-  var out_of = [];
-  var year = false;
-  var count = 0;
-  var page_limit = "10"; // page limit for rotten tomatoes api
+  $("#search").val("").blur();
+
+  movie_title = false;
+  display_title = false;
+  source_classes = [];
+  source_names = [];
+  scores = [];
+  out_of = [];
+  year = false;
+  count = 0;
+  imdb_id = false;
+  page_limit = "10"; // page limit for rotten tomatoes api
+
+do_imdb();
+}
 
 
 
 
+function do_imdb() {
 
-  // IMDB, class="imdb", out_of="/ 10", score="8.4"
   $.ajax({
     url: "http://www.imdbapi.com/?t="+title_url,
     dataType: 'jsonp',
     timeout: 10000,
     success: function(data){
-      if (data.Title) {
+      if (!year || !movie_title) {
         year = data.Year;
-        movie_title = data.Title
+        movie_title = data.Title;
         display_title = movie_title + " <span class='dem'>(" + year + ")</span>";
-        source_classes[count] = "imdb";
-        source_names[count] = "IMDB";
-        scores[count] = data.Rating;
+      }
+      imdb_id = data.ID;
+      source_classes[count] = "imdb";
+      source_names[count] = "IMDB";
+      scores[count] = data.Rating;
+      out_of[count] = "/ 10";
+      count += 1;
+    },
+    error: function(crap){
+      // alert("RT fail");
+    },
+    complete: function() {
+      do_rt(movie_title);
+    }
+  });
+}
+
+function do_rt() {
+
+  $.ajax({
+    url: "http://api.rottentomatoes.com/api/public/v1.0/movies.json?apikey=f278acux2dr8vmmueege9bfv&page_limit="+
+                                                                                      page_limit+"&q="+title_url,
+    dataType: 'jsonp',
+    timeout: 10000,
+    success: function(data){
+      if (data.total > 0) { //only analyze if there's some returned data
+        var limit = Math.min(data.total, page_limit); //make sure the page_limit variable is set
+        for (i = 0; i < limit; i++) {
+          // check to see if the searched title matches the exact json title
+          if (data.movies[i].title == movie_title && data.movies[i].year == year) {
+            break;
+          }
+        };
+        if (i >= limit) {
+          i = 0;
+        }
+
+        var movie_data = data.movies[i];
+
+        if (!year || !movie_title) {
+          year = movie_data.year.toString();;
+          movie_title = movie_data.title;
+          display_title = movie_title + " <span class='dem'>(" + year + ")</span>";
+        }
+
+        if (!imdb_id && movie_data.alternate_ids.imdb) {
+          imdb_id = movie_data.alternate_ids.imdb;
+        }
+
+        if (movie_data.ratings.critics_score >= 0){
+          source_classes[count] = "rtc";
+          source_names[count] = "Rotten Tomatoes: Critics";
+          scores[count] = movie_data.ratings.critics_score;
+          out_of[count] = "%";
+          count += 1;
+        }
+        source_classes[count] = "rta";
+        source_names[count] = "Rotten Tomatoes: Audience";
+        scores[count] = movie_data.ratings.audience_score;
+        out_of[count] = "%";
+        count += 1;
+      }
+    },
+    error: function(crap){
+      // alert("RT fail");
+    },
+    complete: function() {
+      do_tmdb(movie_title);
+    }
+  });
+
+}
+
+function do_tmdb() {
+  var search_url;
+  if (imdb_id) {
+    search_url = "http://api.themoviedb.org/2.1/Movie.imdbLookup/en/json/bb0d9620f620e8097998203a8af18aec/"+
+                    imdb_id;
+  }
+  else {
+    search_url = "http://api.themoviedb.org/2.1/Movie.search/en/json/bb0d9620f620e8097998203a8af18aec/"+
+                    title_url;
+    if (year) {
+      searc_url = search_url + "+" + year;
+    }
+  }
+  $.ajax({
+    // type: "GET",
+    url: search_url,
+    dataType: 'jsonp',
+    timeout: 10000,
+    success: function(data){
+      if (data.length > 0){
+        source_classes[count] = "tmdb";
+        source_names[count] = "The Movie DB";
+        scores[count] = data[0].rating;
         out_of[count] = "/ 10";
         count += 1;
       }
@@ -74,55 +211,14 @@ function find_movie() {
       // alert("RT fail");
     },
     complete: function() {
-      $.ajax({
-        url: "http://api.rottentomatoes.com/api/public/v1.0/movies.json?apikey=f278acux2dr8vmmueege9bfv&page_limit="+
-                                                                                      page_limit+"&q="+title_url,
-        dataType: 'jsonp',
-        timeout: 10000,
-        success: function(data){
-          if (data.total > 0) { //only analyze if there's some returned data
-            var limit = Math.min(data.total, page_limit);
-            for (i = 0; i < limit; i++) {
-              // check to see if the searched title matches the exact json title
-              if (data.movies[i].title == movie_title && data.movies[i].year == year) {
-                break;
-              }
-            };
-            if (i >= limit) {
-              i = 0;
-            }
-
-            var movie_data = data.movies[i];
-            if (!movie_title) {
-              movie_title = movie_data.title;
-              display_title = movie_title + " <span class='dem'>(" + year + ")</span>";
-            }
-            if (movie_data.ratings.critics_score >= 0){
-              source_classes[count] = "rtc";
-              source_names[count] = "Rotten Tomatoes: Critics";
-              scores[count] = movie_data.ratings.critics_score;
-              out_of[count] = "%";
-              count += 1;
-            }
-            source_classes[count] = "rta";
-            source_names[count] = "Rotten Tomatoes: Audience";
-            scores[count] = movie_data.ratings.audience_score;
-            out_of[count] = "%";
-            count += 1;
-          }
-        },
-        error: function(crap){
-          // alert("IMDB fail");
-        },
-        complete: function() {
-          fill_output(display_title, source_classes, source_names, scores, out_of);
-        }
-
-      });
+      fill_output(display_title, source_classes, source_names, scores, out_of);
     }
   });
 
 }
+
+
+
 
 function fill_output(display_title, source_classes, source_names, scores, out_of) {
 
@@ -215,65 +311,4 @@ function fill_output(display_title, source_classes, source_names, scores, out_of
   output_html.hide();
   $(".outputs").prepend(output_html);
   output_html.slideDown(500);
-  $("#search").val("").blur();
 }
-
-// $(document).ready(function(){
-//   var container = $('#target');
-//   $('.ajaxtrigger').click(function(){
-//     doAjax($(this).attr('href'));
-//     return false;
-//   });
-//   function doAjax(url){
-//     if(url.match('^http')){
-
-//       $.getJSON("http://query.yahooapis.com/v1/public/yql?"+
-//                 "q=select%20*%20from%20html%20where%20url%3D%22"+
-//                 encodeURIComponent(url)+
-//                 "%22&format=xml'&callback=?",
-//         function(data){
-
-//           if(data.results[0]){
-//             var data = filterData(data.results[0]);
-//             // var data_alert = data.results[0];
-//             // alert(data_alert);
-//             var j_data = $(data);
-//             alert(j_data);
-//             container.html();
-//           } else {
-//             var errormsg = '<p>Error: could not load the page.</p>';
-//             container.html(errormsg);
-//           }
-//         }
-//       );
-//     } else {
-//       $('#target').load(url);
-//     }
-//   }
-//   function filterData(data){
-//     data = data.replace(/<?\/body[^>]*>/g,'');
-//     data = data.replace(/[\r|\n]+/g,'');
-//     data = data.replace(/<--[\S\s]*?-->/g,'');
-//     data = data.replace(/<noscript[^>]*>[\S\s]*?<\/noscript>/g,'');
-//     data = data.replace(/<script[^>]*>[\S\s]*?<\/script>/g,'');
-//     data = data.replace(/<script.*\/>/,'');
-//     return data;
-//   }
-// });
-
-  //     $.ajax({
-  //       url: "http://www.imdbapi.com/?i=&t=inception",
-  //       dataType: 'jsonp',
-  //       success: function(data){
-  //         var t = data.Title;
-  //         alert("first: "+t);
-  //       }
-  //     });
-  //     $.ajax({
-  //       url:"http://api.rottentomatoes.com/api/public/v1.0/movies.json?apikey=f278acux2dr8vmmueege9bfv&q=inception",
-  //       dataType: 'jsonp',
-  //       success: function(data){
-  //         var t = data.movies[0].title;
-  //         alert("second: "+t);
-  //       }
-  //     });
