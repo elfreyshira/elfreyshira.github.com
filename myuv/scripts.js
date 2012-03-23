@@ -1,4 +1,6 @@
-// http://api.themoviedb.org/2.1/
+// ****************
+// make it where it calls everything at once.
+
 // http://www.deanclatworthy.com/imdb/
 have_searched = false;
 
@@ -43,32 +45,6 @@ function make_url_able(str) {
 
 
 
-// function make_ajax_calls(arr, index) {
-//   $.ajax({
-//     url: "http://www.imdbapi.com/?t="+title_url,
-//     dataType: 'jsonp',
-//     timeout: 10000,
-//     success: function(data){
-//       if (data.Title) {
-//         year = data.Year;
-//         movie_title = data.Title;
-//         display_title = movie_title + " <span class='dem'>(" + year + ")</span>";
-//         source_classes[count] = "imdb";
-//         source_names[count] = "IMDB";
-//         scores[count] = data.Rating;
-//         out_of[count] = "/ 10";
-//         count += 1;
-//       }
-//     },
-//     error: function(crap){
-//       // alert("RT fail");
-//     },
-//     complete: function() {}
-//   });
-// }
-
-
-
 
 function find_movie() {
 
@@ -76,8 +52,6 @@ function find_movie() {
   have_searched = true;
   title_search = $("#search").val();
   title_url = make_url_able(title_search);
-
-  $("#search").val("").blur();
 
   movie_title = false;
   display_title = false;
@@ -90,9 +64,20 @@ function find_movie() {
   imdb_id = false;
   page_limit = "10"; // page limit for rotten tomatoes api
 
-do_imdb();
+  ajax_count = 0;
+  total = 3; // *** total number of sites it looks for ****
+
+  do_imdb();
+  // do_rt();
+  // do_tmdb();
 }
 
+function finish_up() {
+  ajax_count += 1;
+  if (ajax_count >= total) {
+    fill_output(display_title, source_classes, source_names, scores, out_of);
+  }
+}
 
 
 
@@ -119,7 +104,8 @@ function do_imdb() {
       // alert("RT fail");
     },
     complete: function() {
-      do_rt(movie_title);
+      do_rt();
+      // finish_up();
     }
   });
 }
@@ -153,7 +139,7 @@ function do_rt() {
         }
 
         if (!imdb_id && movie_data.alternate_ids.imdb) {
-          imdb_id = movie_data.alternate_ids.imdb;
+          imdb_id = "tt"+movie_data.alternate_ids.imdb;
         }
 
         if (movie_data.ratings.critics_score >= 0){
@@ -174,7 +160,8 @@ function do_rt() {
       // alert("RT fail");
     },
     complete: function() {
-      do_tmdb(movie_title);
+      do_tmdb();
+      // finish_up();
     }
   });
 
@@ -199,7 +186,12 @@ function do_tmdb() {
     dataType: 'jsonp',
     timeout: 10000,
     success: function(data){
-      if (data.length > 0){
+      if (data.length > 0 && data[0].rating){
+        if (!year || !movie_title) {
+          year = data[0].released.split("-")[0];
+          movie_title = data[0].name;
+          display_title = movie_title + " <span class='dem'>(" + year + ")</span>";
+        }
         source_classes[count] = "tmdb";
         source_names[count] = "The Movie DB";
         scores[count] = data[0].rating;
@@ -212,6 +204,7 @@ function do_tmdb() {
     },
     complete: function() {
       fill_output(display_title, source_classes, source_names, scores, out_of);
+      // finish_up();
     }
   });
 
@@ -311,4 +304,5 @@ function fill_output(display_title, source_classes, source_names, scores, out_of
   output_html.hide();
   $(".outputs").prepend(output_html);
   output_html.slideDown(500);
+  $("#search").val("").blur();
 }
