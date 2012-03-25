@@ -5,6 +5,8 @@
 have_searched = false;
 
 $(document).ready(function() {
+
+  $(".cover, .loader").hide();
   $("#search").attr("onblur","check_empty_blur()");
   $("#search").attr("onfocus","check_empty_focus()");
   check_empty_blur();
@@ -48,6 +50,8 @@ function make_url_able(str) {
 
 function find_movie() {
 
+  $(".cover").show().animate({opacity: 0.5},200);
+  $(".loader").show().animate({opacity: 1.0},200);
 
   have_searched = true;
   title_search = $("#search").val();
@@ -76,6 +80,7 @@ function finish_up() {
   ajax_count += 1;
   if (ajax_count >= total) {
     fill_output(display_title, source_classes, source_names, scores, out_of);
+
   }
 }
 
@@ -203,6 +208,9 @@ function do_tmdb() {
       // alert("RT fail");
     },
     complete: function() {
+      $(".cover, .loader").animate({opacity: 0.0},200,function() {
+        $(this).hide();
+      });
       fill_output(display_title, source_classes, source_names, scores, out_of);
       // finish_up();
     }
@@ -222,7 +230,7 @@ function fill_output(display_title, source_classes, source_names, scores, out_of
   var percentages = []; //array of floats
 
   // filling in the html//////////////////////
-  var source_entry = '<span></span> \n\
+  var source_entry = '\
       <div class="SOURCE_CLASS source"> \n\
         <div class="empty"></div> \n\
         <p> SOURCE_NAME </p> \n\

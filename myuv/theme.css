@@ -12,6 +12,23 @@ body {
   background-color: #fafafa;
 }
 
+.cover {
+  background-color: black;
+  opacity: 0;
+  width: 100%;
+  height: 150%;
+  position: fixed;
+  margin-top: -20px;
+  padding: 0;
+}
+
+.loader {
+  opacity: 0;
+  position: fixed;
+  left: 48%;
+  top: 40%;
+}
+
 .search_div {
   width: 500px;
   margin: 20px auto;
@@ -83,6 +100,7 @@ header {
       float: left;
       width: 100%;
       height: 30px;
+      margin-bottom: 15px;
     }
 
 
