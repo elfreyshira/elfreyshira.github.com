@@ -55,6 +55,7 @@ function find_movie() {
 
   have_searched = true;
   title_search = $("#search").val();
+  $("#search").blur();
   title_url = make_url_able(title_search);
 
   movie_title = false;
