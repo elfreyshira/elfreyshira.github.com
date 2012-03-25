@@ -12,19 +12,21 @@ body {
   background-color: #fafafa;
 }
 
+
+.cover, .loader {
+  opacity: 0;
+  position: fixed;
+  z-index: 1000;
+}
 .cover {
   background-color: black;
-  opacity: 0;
   width: 100%;
   height: 150%;
-  position: fixed;
   margin-top: -20px;
   padding: 0;
 }
 
 .loader {
-  opacity: 0;
-  position: fixed;
   left: 48%;
   top: 40%;
 }
