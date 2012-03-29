@@ -86,28 +86,39 @@ function finish_up() {
 }
 
 
-
+imdb_fail = false;
 function do_imdb() {
 
   $.ajax({
     url: "http://www.imdbapi.com/?t="+title_url,
     dataType: 'jsonp',
-    timeout: 10000,
+    timeout: 5000,
     success: function(data){
-      if (!year || !movie_title) {
-        year = data.Year;
-        movie_title = data.Title;
-        display_title = movie_title + " <span class='dem'>(" + year + ")</span>";
+      if (data.Response == "True") {
+        if (!year || !movie_title) {
+          year = data.Year;
+          movie_title = data.Title;
+          display_title = movie_title + " <span class='dem'>(" + year + ")</span>";
+        }
+        imdb_id = data.ID;
+        if (data.Rating != "N/A") {
+          source_classes[count] = "imdb";
+          source_names[count] = "IMDB";
+          scores[count] = data.Rating;
+          out_of[count] = "/ 10";
+          imdb_fail = false;
+          count += 1;
+        }
+        else {
+          imdb_fail = true;
+        }
       }
-      imdb_id = data.ID;
-      source_classes[count] = "imdb";
-      source_names[count] = "IMDB";
-      scores[count] = data.Rating;
-      out_of[count] = "/ 10";
-      count += 1;
+      else {
+        imdb_fail = true;
+      }
     },
     error: function(crap){
-      // alert("RT fail");
+      imdb_fail = true;
     },
     complete: function() {
       do_rt();
@@ -116,13 +127,22 @@ function do_imdb() {
   });
 }
 
+
 function do_rt() {
 
+  var search_url;
+  if (movie_title) {
+    search_url = "http://api.rottentomatoes.com/api/public/v1.0/movies.json?apikey=f278acux2dr8vmmueege9bfv&page_limit="+
+                                                                  page_limit+"&q="+make_url_able(movie_title);
+  }
+  else {
+    search_url = "http://api.rottentomatoes.com/api/public/v1.0/movies.json?apikey=f278acux2dr8vmmueege9bfv&page_limit="+
+                                                                                      page_limit+"&q="+title_url;
+  }
   $.ajax({
-    url: "http://api.rottentomatoes.com/api/public/v1.0/movies.json?apikey=f278acux2dr8vmmueege9bfv&page_limit="+
-                                                                                      page_limit+"&q="+title_url,
+    url: search_url,
     dataType: 'jsonp',
-    timeout: 10000,
+    timeout: 5000,
     success: function(data){
       if (data.total > 0) { //only analyze if there's some returned data
         var limit = Math.min(data.total, page_limit); //make sure the page_limit variable is set
@@ -183,14 +203,14 @@ function do_tmdb() {
     search_url = "http://api.themoviedb.org/2.1/Movie.search/en/json/bb0d9620f620e8097998203a8af18aec/"+
                     title_url;
     if (year) {
-      searc_url = search_url + "+" + year;
+      search_url = search_url + "+" + year;
     }
   }
   $.ajax({
     // type: "GET",
     url: search_url,
     dataType: 'jsonp',
-    timeout: 10000,
+    timeout: 5000,
     success: function(data){
       if (data.length > 0 && data[0].rating){
         if (!year || !movie_title) {
@@ -209,14 +229,62 @@ function do_tmdb() {
       // alert("RT fail");
     },
     complete: function() {
-      $(".cover, .loader").animate({opacity: 0.0},200,function() {
-        $(this).hide();
-      });
-      fill_output(display_title, source_classes, source_names, scores, out_of);
+      if (imdb_fail){
+        do_imdb_backup();
+      }
+      else {
+        fill_output(display_title, source_classes, source_names, scores, out_of);
+      }
       // finish_up();
     }
   });
 
+}
+
+function imdbapi(data){ //from do_imdb_backup from http://www.deanclatworthy.com/imdb
+  if (data.code != 1 && data.rating != "n/a") {
+    if (!year || !movie_title) {
+      year = data.year;
+      movie_title = data.title;
+      display_title = movie_title + " <span class='dem'>(" + year + ")</span>";
+    }
+    imdb_id = data.imdbid;
+    source_classes[count] = "imdb";
+    source_names[count] = "IMDB";
+    scores[count] = data.rating;
+    out_of[count] = "/ 10";
+    count += 1;
+  }
+}
+function do_imdb_backup() {
+  var search_url;
+  if (imdb_id) {
+    search_url = "http://www.deanclatworthy.com/imdb/?id="+imdb_id;
+  }
+  else if (movie_title) {
+    search_url = "http://www.deanclatworthy.com/imdb/?q="+make_url_able(movie_title);
+    if (year) {
+      search_url = search_url + "&year=" + year;
+    }
+  }
+  else {
+    search_url = "http://www.deanclatworthy.com/imdb/?q="+title_url;
+  }
+  search_url = search_url + "&type=jsonp";
+
+  $.ajax({
+    url: search_url,
+    dataType: 'jsonp',
+    timeout: 5000,
+    success: function(data){
+    },
+    error: function(crap){
+    },
+    complete: function() {
+      fill_output(display_title, source_classes, source_names, scores, out_of);
+      // finish_up();
+    }
+  });  
 }
 
 
@@ -224,8 +292,12 @@ function do_tmdb() {
 
 function fill_output(display_title, source_classes, source_names, scores, out_of) {
 
+  $(".cover, .loader").animate({opacity: 0.0},200,function() {
+    $(this).hide();
+  });
+
   if (!display_title) {
-    alert("your internet is probably down");
+    alert("Either your internet isn't working, or you're misspelling it.");
     return;
   }
   var percentages = []; //array of floats
