@@ -6,11 +6,22 @@ have_searched = false;
 
 $(document).ready(function() {
 
+  // setting the movie input text
   $(".cover, .loader").hide();
   $("#search").attr("onblur","check_empty_blur()");
   $("#search").attr("onfocus","check_empty_focus()");
   check_empty_blur();
+
+  $("#about").hide();
+
+  
+
 });
+
+function show_about(){
+  $("#about").slideToggle(500);
+  // $(".source").slideToggle();
+}
 
 function check_empty_blur() {
   if ($("#search").val() == "") {
@@ -34,7 +45,20 @@ function make_url_able(str) {
   return str.replace(/\W|_/g,"+").replace(/\++/g,"+");
 }
 
+function percent_match(query, found) {
+  // returns how many percent of of found has query in it.
+  var query_list = query.toLowerCase().split(/\W+/);
+  var found_list = found.toLowerCase().split(/\W+/);
+  var word_count = 0.0;
+  for (var i = 0; i < found_list.length; i++) {
+    if (query_list.indexOf(found_list[i]) >= 0) {
+      word_count += 1.0;
+    }
+  };
+  var percent = word_count/found_list.length;
+  return percent;
 
+}
 
 
 
@@ -72,27 +96,20 @@ function find_movie() {
   ajax_count = 0;
   total = 3; // *** total number of sites it looks for ****
 
+  // fill_output("Inception (2010)", ["imdb","rt"], ["IMDB","Rotten Tomatoes"], ["9","60"], ["/ 10","%"]);
+  // return;
   do_imdb();
   // do_rt();
   // do_tmdb();
 }
 
-function finish_up() {
-  ajax_count += 1;
-  if (ajax_count >= total) {
-    fill_output(display_title, source_classes, source_names, scores, out_of);
-
-  }
-}
-
 
 imdb_fail = false;
 function do_imdb() {
-
   $.ajax({
     url: "http://www.imdbapi.com/?t="+title_url,
     dataType: 'jsonp',
-    timeout: 5000,
+    timeout: 10000,
     success: function(data){
       if (data.Response == "True") {
         if (!year || !movie_title) {
@@ -144,16 +161,28 @@ function do_rt() {
     dataType: 'jsonp',
     timeout: 5000,
     success: function(data){
+
       if (data.total > 0) { //only analyze if there's some returned data
+
         var limit = Math.min(data.total, page_limit); //make sure the page_limit variable is set
+        if (movie_title) { match_query = movie_title; }
+        else { match_query = title_search; }
+
+        max_rate = 0;
+        max_rate_index = 0;
         for (i = 0; i < limit; i++) {
           // check to see if the searched title matches the exact json title
           if (data.movies[i].title == movie_title && data.movies[i].year == year) {
             break;
           }
+          var rate_match = percent_match(match_query, data.movies[i].title);
+          if (rate_match > max_rate) {
+            max_rate = rate_match;
+            max_rate_index = i;
+          }
         };
         if (i >= limit) {
-          i = 0;
+          i = max_rate_index;
         }
 
         var movie_data = data.movies[i];
@@ -164,7 +193,7 @@ function do_rt() {
           display_title = movie_title + " <span class='dem'>(" + year + ")</span>";
         }
 
-        if (!imdb_id && movie_data.alternate_ids.imdb) {
+        if (!imdb_id && movie_data.alternate_ids && movie_data.alternate_ids.imdb) {
           imdb_id = "tt"+movie_data.alternate_ids.imdb;
         }
 
@@ -313,7 +342,7 @@ function fill_output(display_title, source_classes, source_names, scores, out_of
           <span class="dem">OUT_OF</span> \n\
         </div> \n\
       </div> ';
-  var final_output = '<div class="entry_output">';
+  var final_output = '<div class="entry_output"> <div class="scores_output">';
   for (var i = 0; i < source_classes.length; i++) {
     scores[i] = Math.max(scores[i],0);
     final_output += source_entry.replace("SOURCE_CLASS",source_classes[i]).replace("SOURCE_NAME",source_names[i]
@@ -327,13 +356,13 @@ function fill_output(display_title, source_classes, source_names, scores, out_of
       percentages[i] = parseFloat(scores[i])/parseFloat(out_of[i].split(" ")[1]);
     }
   };
-  final_output += ' \n\
+  final_output += ' </div>\n\
     <div class="movie_footer"> <p>' + display_title +'</p> </div> \n\
     </div>';
   var output_html = $(final_output);
 
-  // filling in the CSS //////////////////////////////
 
+  // filling in the CSS //////////////////////////////
 
   var width_percent = 100.0/percentages.length;
   width_percent = width_percent.toString()+"%";
@@ -386,4 +415,9 @@ function fill_output(display_title, source_classes, source_names, scores, out_of
   $(".outputs").prepend(output_html);
   output_html.slideDown(500);
   $("#search").val("").blur();
+
+  // $(output_html).find(".movie_footer").click( function() {
+  //   // $(this).parent().find(".source").slideToggle();
+  //   $(this).parent().slideToggle();
+  // });
 }
