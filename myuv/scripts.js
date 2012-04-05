@@ -42,7 +42,8 @@ function check_empty_focus() {
 
 
 function make_url_able(str) {
-  return str.replace(/\W|_/g,"+").replace(/\++/g,"+");
+  // return str.replace(/\W|_/g,"+").replace(/\++/g,"+");
+  return str.replace(/[_]/g,"+").replace(/[-·]/,"_").replace(/\W+/g,"+").replace(/_/,"-");
 }
 
 function percent_match(query, found) {
@@ -171,10 +172,18 @@ function do_rt() {
         max_rate = 0;
         max_rate_index = 0;
         for (i = 0; i < limit; i++) {
+
+          // if the RT imdb_id matches the previous imdb_id
+          if (imdb_id && imdb_id == "tt"+data.movies[i].alternate_ids.imdb) {
+            break;
+          }
+
           // check to see if the searched title matches the exact json title
           if (data.movies[i].title == movie_title && data.movies[i].year == year) {
             break;
           }
+
+          // if the imdb_id is false and no title matches, then check matching rate
           var rate_match = percent_match(match_query, data.movies[i].title);
           if (rate_match > max_rate) {
             max_rate = rate_match;
