@@ -84,23 +84,6 @@ function show_about(){
   // $(".source").slideToggle();
 }
 
-function check_empty_blur() {
-  if ($("#search").val() == "") {
-    if (have_searched) { search_value = "another movie -> press enter"; }
-    else               { search_value = "movie name -> press enter"; }
-    $("#search").val(search_value)
-                .css("color","#ccc");
-  }
-}
-function check_empty_focus() {
-  var search = $("#search");
-  if ($("#search").val() == "movie name -> press enter" ||
-                  $("#search").val() == "another movie -> press enter" ) {
-    $("#search").val("")
-                .css("color","#000");
-  }
-}
-
 
 function make_url_able(str) {
   // return str.replace(/\W|_/g,"+").replace(/\++/g,"+");
