@@ -58,6 +58,7 @@ $(document).ready(function() {
     select: function(event, ui){
       imdb_id = ui.item.hidden;
       autocomplete_title = ui.item.value;
+
       find_movie();
     }
     // select: function( event, ui ) {
@@ -118,7 +119,8 @@ function percent_match(query, found) {
 
 
 function find_movie() {
-  $("#search").autocomplete("close");
+  
+  $("#search").autocomplete("disable").autocomplete("close");
 
   $(".cover").show().animate({opacity: 0.5},200);
   $(".loader").show().animate({opacity: 1.0},200);
@@ -393,6 +395,7 @@ function do_imdb_backup() {
 function fill_output(display_title, source_classes, source_names, scores, out_of) {
   imdb_id = false;
   autocomplete_title = false;
+  $("#search").autocomplete("enable");
 
   $(".cover, .loader").animate({opacity: 0.0},200,function() {
     $(this).hide();
