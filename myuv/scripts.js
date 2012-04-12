@@ -3,16 +3,77 @@
 
 // http://www.deanclatworthy.com/imdb/
 have_searched = false;
+imdb_id = false;
+autocomplete_title = false;
 
 $(document).ready(function() {
 
-  // setting the movie input text
   $(".cover, .loader").hide();
-  $("#search").attr("onblur","check_empty_blur()");
-  $("#search").attr("onfocus","check_empty_focus()");
-  check_empty_blur();
+  $("#search").attr("placeholder","movie name -> press enter");
+
+  // setting the movie input text
+  // $("#search").attr("onblur","check_empty_blur()");
+  // $("#search").attr("onfocus","check_empty_focus()");
+  // check_empty_blur();
 
   $("#about").hide();
+
+  // return;
+
+  $( "#search" ).autocomplete({
+    source: function( request, response ) {
+      $.ajax({
+        url: "http://api.rottentomatoes.com/api/public/v1.0/movies.json",
+        dataType: "jsonp",
+        data: {
+          apikey: "f278acux2dr8vmmueege9bfv",
+          page_limit: 5,
+          page: 1,
+          q: request.term
+        },
+        success: function( data ) {
+          response( $.map( data.movies, function( item ) {
+            // return item.title
+            if (item.alternate_ids) {
+              if (item.alternate_ids.imdb) {
+                imdb_id = "tt"+item.alternate_ids.imdb;
+              }
+            }
+
+            return {
+              label: item.title+" ("+String(item.year)+")",
+              value: item.title,
+              hidden: imdb_id
+            }
+          }));
+
+        },
+        error: function(data) {
+          $("#search").autocomplete("disable").delay(5000).autocomplete("enable");
+        }
+      });
+    },
+    delay: 10,
+    minLength: 3,
+    select: function(event, ui){
+      imdb_id = ui.item.hidden;
+      autocomplete_title = ui.item.value;
+      find_movie();
+    }
+    // select: function( event, ui ) {
+    //   log( ui.item ?
+    //     "Selected: " + ui.item.label :
+    //     "Nothing selected, input was " + this.value);
+    // },
+    // open: function() {
+    //   $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
+    // },
+    // close: function() {
+    //   $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
+    // }
+  });
+
+
 
   
 
@@ -74,14 +135,20 @@ function percent_match(query, found) {
 
 
 function find_movie() {
+  $("#search").autocomplete("close");
 
   $(".cover").show().animate({opacity: 0.5},200);
   $(".loader").show().animate({opacity: 1.0},200);
 
-  have_searched = true;
+  $("#search").attr("placeholder","another movie -> press enter");
+
   title_search = $("#search").val();
   $("#search").blur();
   title_url = make_url_able(title_search);
+
+  if (autocomplete_title != title_search) {
+    imdb_id = false;
+  }
 
   movie_title = false;
   display_title = false;
@@ -91,7 +158,6 @@ function find_movie() {
   out_of = [];
   year = false;
   count = 0;
-  imdb_id = false;
   page_limit = "10"; // page limit for rotten tomatoes api
 
   ajax_count = 0;
@@ -107,8 +173,16 @@ function find_movie() {
 
 imdb_fail = false;
 function do_imdb() {
+  search_url = "http://www.imdbapi.com/?";
+  if (imdb_id) {
+    search_url += "i="+imdb_id;
+  }
+  else {
+    search_url += "t="+title_url;
+  }
+
   $.ajax({
-    url: "http://www.imdbapi.com/?t="+title_url,
+    url: search_url,
     dataType: 'jsonp',
     timeout: 10000,
     success: function(data){
@@ -174,7 +248,12 @@ function do_rt() {
         for (i = 0; i < limit; i++) {
 
           // if the RT imdb_id matches the previous imdb_id
-          if (imdb_id && imdb_id == "tt"+data.movies[i].alternate_ids.imdb) {
+          if (data.movies[i].alternate_ids) {
+            if (data.movies[i].alternate_ids.imdb) {
+              imdb_id_check = "tt"+data.movies[i].alternate_ids.imdb;
+            }
+          }
+          if (imdb_id && imdb_id == imdb_id_check) {
             break;
           }
 
@@ -329,13 +408,15 @@ function do_imdb_backup() {
 
 
 function fill_output(display_title, source_classes, source_names, scores, out_of) {
+  imdb_id = false;
+  autocomplete_title = false;
 
   $(".cover, .loader").animate({opacity: 0.0},200,function() {
     $(this).hide();
   });
 
   if (!display_title) {
-    alert("Either your internet isn't working, or you're misspelling it.");
+    alert("Either your internet isn't working or the movie you're searching for is too hipster for the mainstream databases.");
     return;
   }
   var percentages = []; //array of floats
