@@ -4,6 +4,7 @@
 // http://www.deanclatworthy.com/imdb/
 have_searched = false;
 imdb_id = false;
+rt_id = false;
 autocomplete_title = false;
 
 $(document).ready(function() {
@@ -43,7 +44,8 @@ $(document).ready(function() {
             return {
               label: item.title+" ("+String(item.year)+")",
               value: item.title,
-              hidden: imdb_id
+              imdb: imdb_id,
+              rtid: item.id
             }
           }));
 
@@ -56,8 +58,10 @@ $(document).ready(function() {
     delay: 10,
     minLength: 3,
     select: function(event, ui){
-      imdb_id = ui.item.hidden;
+      imdb_id = ui.item.imdb;
       autocomplete_title = ui.item.value;
+      rt_id = ui.item.rtid;
+      // alert(imdb_id+" :: "+autocomplete_title+" :: "+rt_id)
 
       find_movie();
     }
@@ -88,7 +92,7 @@ function show_about(){
 
 function make_url_able(str) {
   // return str.replace(/\W|_/g,"+").replace(/\++/g,"+");
-  return str.replace(/[_]/g,"+").replace(/[-·]/,"_").replace(/\W+/g,"+").replace(/_/,"-");
+  return str.replace(/_/g,"+").replace(/'\w{1}\b/g,"").replace(/[-·]/g,"_").replace(/\W+/g,"+").replace(/_/g,"-");
 }
 
 function percent_match(query, found) {
@@ -158,7 +162,7 @@ function find_movie() {
 
 imdb_fail = false;
 function do_imdb() {
-  search_url = "http://www.imdbapi.com/?";
+  var search_url = "http://www.imdbapi.com/?";
   if (imdb_id) {
     search_url += "i="+imdb_id;
   }
@@ -208,7 +212,10 @@ function do_imdb() {
 function do_rt() {
 
   var search_url;
-  if (movie_title) {
+  if (rt_id){
+    search_url = "http://api.rottentomatoes.com/api/public/v1.0/movies/"+rt_id+".json?apikey=f278acux2dr8vmmueege9bfv";
+  }
+  else if (movie_title) {
     search_url = "http://api.rottentomatoes.com/api/public/v1.0/movies.json?apikey=f278acux2dr8vmmueege9bfv&page_limit="+
                                                                   page_limit+"&q="+make_url_able(movie_title);
   }
@@ -222,43 +229,48 @@ function do_rt() {
     timeout: 5000,
     success: function(data){
 
-      if (data.total > 0) { //only analyze if there's some returned data
+      if (rt_id || data.total > 0) { //only analyze if there's some returned data
 
-        var limit = Math.min(data.total, page_limit); //make sure the page_limit variable is set
-        if (movie_title) { match_query = movie_title; }
-        else { match_query = title_search; }
+        if (!rt_id) { // check if it's loading a lot of movies or a specific movies
+          var limit = Math.min(data.total, page_limit); //make sure the page_limit variable is set
+          if (movie_title) { match_query = movie_title; }
+          else { match_query = title_search; }
 
-        max_rate = 0;
-        max_rate_index = 0;
-        for (i = 0; i < limit; i++) {
+          max_rate = 0;
+          max_rate_index = 0;
+          for (i = 0; i < limit; i++) {
 
-          // if the RT imdb_id matches the previous imdb_id
-          if (data.movies[i].alternate_ids) {
-            if (data.movies[i].alternate_ids.imdb) {
-              imdb_id_check = "tt"+data.movies[i].alternate_ids.imdb;
+            // if the RT imdb_id matches the previous imdb_id
+            if (data.movies[i].alternate_ids) {
+              if (data.movies[i].alternate_ids.imdb) {
+                imdb_id_check = "tt"+data.movies[i].alternate_ids.imdb;
+              }
             }
-          }
-          if (imdb_id && imdb_id == imdb_id_check) {
-            break;
+            if (imdb_id && imdb_id == imdb_id_check) {
+              break;
+            }
+
+            // check to see if the searched title matches the exact json title
+            if (data.movies[i].title == movie_title && data.movies[i].year == year) {
+              break;
+            }
+
+            // if the imdb_id is false and no title matches, then check matching rate
+            var rate_match = percent_match(match_query, data.movies[i].title);
+            if (rate_match > max_rate) {
+              max_rate = rate_match;
+              max_rate_index = i;
+            }
+          };
+          if (i >= limit) {
+            i = max_rate_index;
           }
 
-          // check to see if the searched title matches the exact json title
-          if (data.movies[i].title == movie_title && data.movies[i].year == year) {
-            break;
-          }
-
-          // if the imdb_id is false and no title matches, then check matching rate
-          var rate_match = percent_match(match_query, data.movies[i].title);
-          if (rate_match > max_rate) {
-            max_rate = rate_match;
-            max_rate_index = i;
-          }
-        };
-        if (i >= limit) {
-          i = max_rate_index;
+          var movie_data = data.movies[i];
         }
+        else { movie_data = data; }
 
-        var movie_data = data.movies[i];
+        // analyze the data
 
         if (!year || !movie_title) {
           year = movie_data.year.toString();;
@@ -394,6 +406,7 @@ function do_imdb_backup() {
 
 function fill_output(display_title, source_classes, source_names, scores, out_of) {
   imdb_id = false;
+  rt_id = false;
   autocomplete_title = false;
   $("#search").autocomplete("enable");
 
