@@ -57,6 +57,13 @@ $(document).ready(function() {
     },
     delay: 10,
     minLength: 3,
+    position: {
+      my: "top",
+      at: "center bottom"
+    },
+    focus: function(event, ui) {
+      $("#search").val(ui.item.value);
+    },
     select: function(event, ui){
       imdb_id = ui.item.imdb;
       autocomplete_title = ui.item.value;
@@ -137,6 +144,7 @@ function find_movie() {
 
   if (autocomplete_title != title_search) {
     imdb_id = false;
+    rt_id = false;
   }
 
   movie_title = false;
@@ -236,11 +244,12 @@ function do_rt() {
           if (movie_title) { match_query = movie_title; }
           else { match_query = title_search; }
 
-          max_rate = 0;
-          max_rate_index = 0;
+          var max_rate = 0;
+          var max_rate_index = 0;
           for (i = 0; i < limit; i++) {
 
             // if the RT imdb_id matches the previous imdb_id
+            var imdb_id_check = false;
             if (data.movies[i].alternate_ids) {
               if (data.movies[i].alternate_ids.imdb) {
                 imdb_id_check = "tt"+data.movies[i].alternate_ids.imdb;
@@ -289,11 +298,13 @@ function do_rt() {
           out_of[count] = "%";
           count += 1;
         }
+        if (movie_data.ratings.audience_score > 0){
         source_classes[count] = "rta";
         source_names[count] = "Rotten Tomatoes: Audience";
         scores[count] = movie_data.ratings.audience_score;
         out_of[count] = "%";
         count += 1;
+        }
       }
     },
     error: function(crap){
