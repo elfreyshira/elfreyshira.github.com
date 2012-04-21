@@ -3,9 +3,13 @@
 
 // http://www.deanclatworthy.com/imdb/
 have_searched = false;
-imdb_id = false;
 rt_id = false;
 autocomplete_title = false;
+
+imdb_id = false;
+movie_title = false;
+display_title = false;
+year = false;
 
 $(document).ready(function() {
 
@@ -45,7 +49,8 @@ $(document).ready(function() {
               label: item.title+" ("+String(item.year)+")",
               value: item.title,
               imdb: imdb_id,
-              rtid: item.id
+              rtid: item.id,
+              year: String(item.year)
             }
           }));
 
@@ -68,6 +73,11 @@ $(document).ready(function() {
       imdb_id = ui.item.imdb;
       autocomplete_title = ui.item.value;
       rt_id = ui.item.rtid;
+
+      movie_title = ui.item.value;
+      year = ui.item.year;
+      display_title = movie_title + " <span class='dem'>(" + year + ")</span>";
+      
       // alert(imdb_id+" :: "+autocomplete_title+" :: "+rt_id)
 
       find_movie();
@@ -147,13 +157,11 @@ function find_movie() {
     rt_id = false;
   }
 
-  movie_title = false;
-  display_title = false;
+
   source_classes = [];
   source_names = [];
   scores = [];
   out_of = [];
-  year = false;
   count = 0;
   page_limit = "10"; // page limit for rotten tomatoes api
 
@@ -412,13 +420,22 @@ function do_imdb_backup() {
   });  
 }
 
+function reset() {
+  have_searched = false;
+  rt_id = false;
+  autocomplete_title = false;
 
+  imdb_id = false;
+  movie_title = false;
+  display_title = false;
+  year = false;
+}
 
 
 function fill_output(display_title, source_classes, source_names, scores, out_of) {
-  imdb_id = false;
-  rt_id = false;
-  autocomplete_title = false;
+
+  reset();
+
   $("#search").autocomplete("enable");
 
   $(".cover, .loader").animate({opacity: 0.0},200,function() {
