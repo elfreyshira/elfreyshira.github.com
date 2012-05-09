@@ -197,11 +197,11 @@ function do_imdb() {
           movie_title = data.Title;
           display_title = movie_title + " <span class='dem'>(" + year + ")</span>";
         }
-        imdb_id = data.ID;
-        if (data.Rating != "N/A") {
+        imdb_id = data.imdbID;
+        if (data.imdbRating != "N/A") {
           source_classes[count] = "imdb";
           source_names[count] = "IMDB";
-          scores[count] = data.Rating;
+          scores[count] = data.imdbRating;
           out_of[count] = "/ 10";
           imdb_fail = false;
           count += 1;
