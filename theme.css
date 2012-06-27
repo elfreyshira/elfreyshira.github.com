@@ -33,7 +33,7 @@ header {
   height: 176px;
   overflow: hidden;
   background-image: url(images/greece.png);
-  background-repeat: no-repeat;
+  background-repeat: repeat-x;
 }
 
 #my-name {
