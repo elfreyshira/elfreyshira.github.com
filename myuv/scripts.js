@@ -95,11 +95,14 @@ $(document).ready(function() {
     // }
   });
 
+  check_and_search();
+
 
 
   
 
 });
+
 
 function show_about(){
   $("#about").slideToggle(500);
@@ -135,12 +138,42 @@ function percent_match(query, found) {
 ///////////// *************************************** /////////////////////
 ///////////// *************************************** /////////////////////
 
+function check_and_search() {
+  var id = get_url_val("id");
+  if (id) {
+    imdb_id = id;
+    loading_movie_effect();
+    query_now();
+    return;
+  }
+  var search = get_url_val("q");
+  if (search) {
+    title_url = search;
+    loading_movie_effect();
+    query_now();
+    return;
+  }
 
+}
 
+function get_url_val( key ) {
+  key = key.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+  var expr = "[\\?&]"+key+"=([^&#]*)";
+  var regex = new RegExp( expr );
+  var results = regex.exec( window.location.hash );
+  if( results !== null ) {
+    return decodeURIComponent(results[1].replace(/\+/g, " "));
+  } else {
+    return false;
+  }
+}
 
+function set_url_val(key, value)
+{
+    window.location.hash = "#s?"+key+"="+value; 
+}
 
-function find_movie() {
-  
+function loading_movie_effect() {
   $("#search").autocomplete("disable").autocomplete("close");
 
   $(".cover").show().animate({opacity: 0.5},200);
@@ -148,16 +181,24 @@ function find_movie() {
 
   $("#search").attr("placeholder","another movie -> press enter");
 
+}
+
+function find_movie() {
+  loading_movie_effect();
+
   title_search = $("#search").val();
   $("#search").blur();
   title_url = make_url_able(title_search);
-
-  if (autocomplete_title != title_search) {
+  if (autocomplete_title != title_url) {
     imdb_id = false;
     rt_id = false;
   }
 
+  query_now();
+}
 
+function query_now() {
+  
   source_classes = [];
   source_names = [];
   scores = [];
@@ -167,6 +208,12 @@ function find_movie() {
 
   ajax_count = 0;
   total = 3; // *** total number of sites it looks for ****
+
+  if (imdb_id) {
+    set_url_val("id",imdb_id);
+  } else {
+    set_url_val("q",title_url);
+  }
 
   // fill_output("Inception (2010)", ["imdb","rt"], ["IMDB","Rotten Tomatoes"], ["9","60"], ["/ 10","%"]);
   // return;
