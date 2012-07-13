@@ -100,10 +100,11 @@
                     <fieldset data-role="controlgroup">
                         <label for="textarea1">
                         </label>
-                        <textarea id="textarea1" placeholder="Enter question text here.">
+                        <textarea id="textarea1" value="" placeholder="Enter question text here." data-value-clear="true">
                         </textarea>
                     </fieldset>
                 </div>
+                <!-- 
                 <div data-role="fieldcontain">
                     <fieldset data-role="controlgroup" data-type="vertical" data-mini="true">
                         <legend>
@@ -112,14 +113,17 @@
                         <label for="radio6">
                             Use simple 1-5 rating
                         </label>
+
+
                         <input name="radiobuttons2" id="radio7" value="radio7" type="radio" data-activate="custom-responses" data-activate-type="show"/>
                         <label for="radio7">
                             Use custom responses
                         </label>
+
+
                     </fieldset>
                 </div>
 
-                <!-- Activated if the "custom responses" radio button is selected. -->
                 <div data-hidden="true" id="custom-responses">
                     <div data-role="fieldcontain">
                         <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
@@ -136,6 +140,14 @@
                             </label>
                         </fieldset>
                     </div>
+
+                    <div data-role="fieldcontain">
+                        <form>
+                        <label for="basic"></label>
+                        <input type="text" name="name" id="basic" placeholder="Enter new response." data-onsubmit="add-above" />
+                        </form>
+                    </div>
+
 
                     <div data-role="fieldcontain">
                         <fieldset data-role="controlgroup" data-type="vertical" data-mini="true">
@@ -166,7 +178,7 @@
                         </fieldset>
                     </div>
                 </div>
-
+ -->
 
                 <a data-role="button" data-inline="true" data-rel="back" data-transition="fade" href="#page2" data-icon="ios-pack-color-delete" data-iconpos="left" data-iconsize="26">
                     Cancel
