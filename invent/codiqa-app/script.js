@@ -39,14 +39,14 @@ $(document).ready(function() {
         // alert(
         var questions_array=[]
         var questions = $("#questions-list li a").toArray();
-        for (var i = questions.length - 1; i >= 0; i--) {
+        for (var i = 0; i < questions.length; i++) {
           questions_array.push(questions[i].innerHTML);
         };
 
         $.ajax({
           type: 'POST',
           url: "localhost:8000",
-          data: array,
+          data: questions_array,
           success: null,
           dataType: "jsonp"
         });
