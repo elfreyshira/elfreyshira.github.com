@@ -1,0 +1,8 @@
+<h1>Events
+
+^{makeTable eventHeaders eventRow events}
+
+<form method=post enctype=#{enctype}>
+  ^{widget}
+  <input type=submit value="Post new event">
+

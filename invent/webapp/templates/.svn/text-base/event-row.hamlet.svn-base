@@ -1,0 +1,15 @@
+<tr>
+  <td>
+    <div class=job>
+    <a class=jobseeker href=@{EventCompanyR eventId employerId}>#{employerName employer}
+    <span> -
+    <span class=graduating>
+    <br>
+    <span class=major>#{userIdent companyOwner}
+    <span> -
+    <span class=degree>Some contact info
+    <br>
+    <span class=desc>#{employerDescription employer} #{descriptionPadding}
+    <br>
+    <a class=view href=@{EventListR}>Something something something
+

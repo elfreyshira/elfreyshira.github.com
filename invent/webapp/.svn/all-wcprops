@@ -1,0 +1,77 @@
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/repos/!svn/ver/162838/sandbox/interns/jwolfe/invent/webapp
+END
+Foundation.hs
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/repos/!svn/ver/162721/sandbox/interns/jwolfe/invent/webapp/Foundation.hs
+END
+LICENSE
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/repos/!svn/ver/162318/sandbox/interns/jwolfe/invent/webapp/LICENSE
+END
+Import.hs
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/repos/!svn/ver/162497/sandbox/interns/jwolfe/invent/webapp/Import.hs
+END
+invent.cabal
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/repos/!svn/ver/162751/sandbox/interns/jwolfe/invent/webapp/invent.cabal
+END
+.gitignore
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/repos/!svn/ver/162482/sandbox/interns/jwolfe/invent/webapp/.gitignore
+END
+.ghci
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/repos/!svn/ver/162347/sandbox/interns/jwolfe/invent/webapp/.ghci
+END
+devel.hs
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/repos/!svn/ver/162318/sandbox/interns/jwolfe/invent/webapp/devel.hs
+END
+Settings.hs
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/repos/!svn/ver/162318/sandbox/interns/jwolfe/invent/webapp/Settings.hs
+END
+Model.hs
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/repos/!svn/ver/162373/sandbox/interns/jwolfe/invent/webapp/Model.hs
+END
+Utils.hs
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/repos/!svn/ver/162557/sandbox/interns/jwolfe/invent/webapp/Utils.hs
+END
+Application.hs
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/repos/!svn/ver/162751/sandbox/interns/jwolfe/invent/webapp/Application.hs
+END
+main.hs
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/repos/!svn/ver/162318/sandbox/interns/jwolfe/invent/webapp/main.hs
+END

@@ -1,0 +1,121 @@
+global = {};
+
+jQuery.prototype.re = function() {
+  this.trigger('create');
+}
+
+$(document).ready(function() {
+
+  // Hide anything that should be hidden
+  $("[data-hidden=true]").hide();
+
+  // Code that reacts to any click that has a "data-activate" attribute
+  $("[data-activate]").click( function() {
+    var activated = $(this);
+    var id_shown = activated.attr("data-activate");
+    var activate_type = activated.attr("data-activate-type");
+    var element_to_activate = $("#"+id_shown);
+    switch(activate_type) {
+      case "show":
+        element_to_activate.slideDown("fast");
+        break;
+      case "hide":
+        element_to_activate.slideUp("fast");
+        break;
+    }
+  });
+
+  $("[data-onsubmit]").click( function() {
+    var activated = $(this);
+    var action = activated.attr("data-onsubmit");
+    switch(action) {
+      case "add-question":
+        var text = $("#new-question-textarea").val();
+        var data = {link: "#edit-question",
+                    text: text};
+        var html = $(Mustache.to_html(new_question_template, data));
+
+        $("#questions-list").append(html).listview('refresh');
+        break;
+      case "save-questions":
+        // alert(
+        var questions_array=[]
+        var questions = $("#questions-list li a").toArray();
+        for (var i = 0; i < questions.length; i++) {
+          questions_array.push(questions[i].innerHTML);
+        };
+
+        $.ajax({
+          type: 'POST',
+          url: "http://jwolfe:3000/criterion/1",
+          data: JSON.stringify(questions_array),
+          success: null,
+          dataType: "json"
+        });
+        break;
+      case "edit-question":
+        var text = $("#edit-question-textarea").val();
+        global['edit-question'].innerHTML = text;
+        break;
+
+    }
+  });
+
+  $("[data-goedit]").click( function(e) {
+    var text = e.target.innerHTML;
+    $("#edit-question-textarea").val(text);
+    global["edit-question"] = e.target;
+
+    // alert($(extra_selectors, activated).html());
+
+
+  });
+
+  // var add_question = function()
+
+  // Code that reacts to a submit on an input text
+  // $("[data-onsubmit]").click( function() {
+  //   var input_element = $(this);
+  //   input_element.blur();
+  //   var text = input_element.val();
+  //   var clone = input_element.clone();
+
+    
+  //   clone.val(text);
+  //   clone.attr("readonly", "readonly");
+
+
+
+
+  //   // clone.val(text);
+  //   // clone.attr("readonly","readonly");
+  //   input_element.val("");
+  //   clone.insertBefore(input_element);
+  //   return false;
+  // });
+
+  // Clear values that should be cleared at the beginning
+  $("[data-value-clear=true]").val("");
+
+
+  var new_question_template = '<li><a href="{{link}}" data-rel="dialog" data-transition="pop">{{text}}</a></li>';
+  // var question = 
+  // var test = $('<div data-role="collapsible" data-collapsed="false"> \
+  //                       <h3>\
+  //                           HAHA\
+  //                       </h3>\
+  //                       <div>\
+  //                           <p>\
+  //                               Communication skills?\
+  //                           </p>\
+  //                       </div>\
+  //                   </div>');
+
+  // $("[data-role=collapsible-set]").append(test).trigger("create");
+
+  // populate_css(jQuery);
+
+
+
+
+});

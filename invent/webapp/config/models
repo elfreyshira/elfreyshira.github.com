@@ -1,0 +1,56 @@
+User
+  ident Text
+  password Text Maybe
+  company EmployerId Maybe
+  resume Text Maybe
+  UniqueUser ident
+Email
+  email Text
+  user UserId Maybe
+  verkey Text Maybe
+  UniqueEmail email
+
+UnhandledContact
+  jobseeker UserId
+  recruiter UserId
+
+Event
+  organizer UserId
+  name Text
+  time UTCTime
+  employers [EmployerId]
+Employer
+  name Text
+  description Text
+  creator UserId
+  recruiters [UserId]
+  jobs [JobId]
+  UniqueEmployer name
+EventJob
+  event EventId
+  employer EmployerId
+  title Text
+  url Text
+Job
+  employer EmployerId
+  title Text
+  url Text
+
+Contact
+  jobseeker UserId
+  recruiter UserId
+
+Criterion
+  text Text
+
+UserEvent
+  user UserId
+  event EventId
+  criteria [CriterionId]
+
+Rating
+  rater UserId
+  ratedUser UserId Maybe
+  ratedEmployer EmployerId Maybe 
+  criteria [CriterionId]
+  values [Int]

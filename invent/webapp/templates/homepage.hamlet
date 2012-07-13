@@ -1,0 +1,9 @@
+<h1>Reinvent Your Event
+
+<ol>
+  <li>
+    <a href=@{HomeR}>Home
+  <li>
+    <a href=@{EventListR}>Events
+  <li>
+    <a href=@{CompaniesR}>Companies

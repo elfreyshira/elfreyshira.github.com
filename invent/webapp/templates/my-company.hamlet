@@ -1,0 +1,10 @@
+<h1>#{companyName}
+
+<h2>Jobs
+
+<form method=post enctype=#{enctype}>
+  ^{widget}
+  <input type=submit value="Add Job">
+
+^{makeTable' jobRows jobs}
+

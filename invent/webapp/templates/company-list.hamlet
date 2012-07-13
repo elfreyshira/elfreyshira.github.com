@@ -1,0 +1,9 @@
+<h1>Companies
+
+$if not $ null $ employers
+  <ol>
+  $forall employer <- displayEmployers
+    <li>#{displayEmployerName employer}
+        Representatives:
+        <ol>
+        $forall recruiter <- displayEmployerRecruiters employer

@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/repos/!svn/ver/162815/sandbox/interns/jwolfe/invent/webapp/config
+END
+client_session_key.aes
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/repos/!svn/ver/162318/sandbox/interns/jwolfe/invent/webapp/config/client_session_key.aes
+END
+settings.yml
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/repos/!svn/ver/162625/sandbox/interns/jwolfe/invent/webapp/config/settings.yml
+END
+routes
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/repos/!svn/ver/162815/sandbox/interns/jwolfe/invent/webapp/config/routes
+END
+sqlite.yml
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/repos/!svn/ver/162318/sandbox/interns/jwolfe/invent/webapp/config/sqlite.yml
+END
+models
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/repos/!svn/ver/162778/sandbox/interns/jwolfe/invent/webapp/config/models
+END
+robots.txt
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/repos/!svn/ver/162318/sandbox/interns/jwolfe/invent/webapp/config/robots.txt
+END
+favicon.ico
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/repos/!svn/ver/162318/sandbox/interns/jwolfe/invent/webapp/config/favicon.ico
+END

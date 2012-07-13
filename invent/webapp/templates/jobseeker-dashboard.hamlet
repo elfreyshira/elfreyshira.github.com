@@ -1,0 +1,3 @@
+<h1>Companies you talked to at #{eventName $ event}
+
+^{companyTable}

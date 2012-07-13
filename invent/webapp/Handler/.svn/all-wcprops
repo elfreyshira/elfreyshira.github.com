@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/repos/!svn/ver/162838/sandbox/interns/jwolfe/invent/webapp/Handler
+END
+Company.hs
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/repos/!svn/ver/162472/sandbox/interns/jwolfe/invent/webapp/Handler/Company.hs
+END
+Dashboard.hs
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/repos/!svn/ver/162838/sandbox/interns/jwolfe/invent/webapp/Handler/Dashboard.hs
+END
+Mobile.hs
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/repos/!svn/ver/162817/sandbox/interns/jwolfe/invent/webapp/Handler/Mobile.hs
+END
+Home.hs
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/repos/!svn/ver/162318/sandbox/interns/jwolfe/invent/webapp/Handler/Home.hs
+END
+Jobseeker.hs
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/repos/!svn/ver/162721/sandbox/interns/jwolfe/invent/webapp/Handler/Jobseeker.hs
+END
+Companies.hs
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/repos/!svn/ver/162751/sandbox/interns/jwolfe/invent/webapp/Handler/Companies.hs
+END
+EventCompanies.hs
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/repos/!svn/ver/162734/sandbox/interns/jwolfe/invent/webapp/Handler/EventCompanies.hs
+END
+Events.hs
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/repos/!svn/ver/162735/sandbox/interns/jwolfe/invent/webapp/Handler/Events.hs
+END
+My.hs
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/repos/!svn/ver/162751/sandbox/interns/jwolfe/invent/webapp/Handler/My.hs
+END

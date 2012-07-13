@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>
+        </title>
+        <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/jquery.mobile/1.1.0/jquery.mobile-1.1.0.min.css" />
+        <link rel="stylesheet" href="my.css" />
+        <style>
+            /* App custom styles */
+        </style>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js">
+        </script>
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery.mobile/1.1.0/jquery.mobile-1.1.0.min.js">
+        </script>
+        <script src="my.js"></script>
+        <script src="script.js"></script>
+        <script src="mustache.js"></script>
+        </script>
+    </head>
+    <body>
+        <!-- Home -->
+        <div data-role="page" id="home">
+            <div data-theme="a" data-role="header" data-position="fixed">
+                <h3>
+                    Meet Students
+                </h3>
+                <a data-role="button" data-transition="slide" href="empActSel.html" data-icon="arrow-l" data-iconpos="left" class="ui-btn-left">
+                    Back
+                </a>
+                <a data-role="button" data-transition="slide" href="#rate-students" data-icon="arrow-r" data-iconpos="right" class="ui-btn-right">
+                    Skip to Rating
+                </a>
+            </div>
+            <div data-role="content" style="padding: 15px" align="center">
+                <h4>
+                    Bump to get resume...
+                </h4>
+                <div>
+                    <img src="images/bump.png" alt="image" />
+                </div>
+            </div>
+            <div data-theme="a" data-role="footer" data-position="fixed">
+                <h3>
+                    Indeed
+                </h3>
+            </div>
+        </div>
+
+        <!-- rate students -->
+        <div data-role="page" id="rate-students">
+            <div data-theme="a" data-role="header" data-position="fixed">
+                <h3>
+                    Rate Students
+                </h3>
+            </div>
+            <div data-role="content" style="padding: 15px">
+                <div data-role="fieldcontain">
+                    <form>
+                        <ul data-role="listview" data-theme="c" id="questions-rate-list">
+    <!--                         <li><a href="#">Action</a></li>
+                            <li><a href="#">AdventureAdventureAdventureAdventureAdventureAdventure</a></li>
+                            <li><a href="#">Comedy</a></li> -->
+                        </ul>
+                    </form>
+                </div>
+
+                <div data-role="content" style="padding: 15px">
+                    <a data-role="button" data-transition="fade" href="#home" data-onsubmit="rate-student">
+                        Submit Rating
+                    </a>
+                </div>
+
+            </div>
+
+            <div data-theme="a" data-role="footer" data-position="fixed">
+                <h3>
+                    Indeed
+                </h3>
+            </div>
+
+        </div>
+
+        <script>
+            //App custom javascript
+        </script>
+    </body>
+</html>

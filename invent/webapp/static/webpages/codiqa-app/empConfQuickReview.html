@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>
+        </title>
+        <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/jquery.mobile/1.1.0/jquery.mobile-1.1.0.min.css" />
+        <link rel="stylesheet" href="my.css" />
+        <style>
+            /* App custom styles */
+        </style>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js">
+        </script>
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery.mobile/1.1.0/jquery.mobile-1.1.0.min.js">
+        </script>
+        <script src="mustache.js"></script>
+        <script src="my.js"></script>
+        <script src="script.js"></script>
+    </head>
+    <body>
+        <!-- questions -->
+        <div data-role="page" data-theme="b" id="questions">
+            <div data-theme="a" data-role="header">
+                <h5>Configure Quick Review</h5>
+            </div>
+
+            
+
+            <div data-role="content" style="padding: 15px">
+
+
+                <div data-role="fieldcontain">
+                    <ul data-role="listview" data-theme="c" id="questions-list" data-goedit="li-a">
+<!--                         <li><a href="#">Action</a></li>
+                        <li><a href="#">AdventureAdventureAdventureAdventureAdventureAdventure</a></li>
+                        <li><a href="#">Comedy</a></li> -->
+                    </ul>
+                </div>
+
+                <!-- Questions accordian -->
+                <div data-role="collapsible-set" data-theme="" data-content-theme="" id="questions-list">
+                    
+
+<!--
+                    <div data-role="collapsible" data-collapsed="false">
+                        <h3>
+                            Coding comprehension?
+                        </h3>
+                        <div data-role="fieldcontain">
+                            <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+                                <legend>
+                                    Choose:
+                                </legend>
+                                <input name="radiobuttons5" id="radio12" value="radio1" type="radio" />
+                                <label for="radio12">
+                                    1
+                                </label>
+                                <input name="radiobuttons5" id="radio13" value="radio13" type="radio" />
+                                <label for="radio13">
+                                    2
+                                </label>
+                                <input name="radiobuttons5" id="radio14" value="radio14" type="radio" />
+                                <label for="radio14">
+                                    3
+                                </label>
+                                <input name="radiobuttons5" id="radio15" value="radio15" type="radio" />
+                                <label for="radio15">
+                                    4
+                                </label>
+                                <input name="radiobuttons5" id="radio16" value="radio16" type="radio" />
+                                <label for="radio16">
+                                    5
+                                </label>
+                            </fieldset>
+                        </div>
+                    </div>
+
+                -->
+                </div>
+
+                <a data-role="button" data-rel="dialog" data-transition="pop" data-theme="b" href="#new-question" data-icon="ios-pack-color-plus" data-iconpos="right" data-iconsize="26">
+                    Add Question
+                </a>
+
+                <a data-role="button" data-transition="pop" data-theme="b" href="empActSel.html" data-icon="ios-pack-color-check" data-iconpos="right" data-iconsize="26" data-onsubmit="save-questions">
+                    Save
+                </a>
+
+            </div>
+            <div data-theme="a" data-role="footer" data-position="fixed">
+                <h3>
+                    Indeed
+                </h3>
+            </div>
+        </div>
+        <!-- new-question -->
+        <div data-role="page" id="new-question">
+            <div data-theme="a" data-role="header">
+                <h3>
+                    New Question
+                </h3>
+            </div>
+            <div data-role="content" style="padding: 15px">
+                <div data-role="fieldcontain">
+                    <fieldset data-role="controlgroup">
+                        <label for="new-question-textarea">
+                        </label>
+                        <textarea id="new-question-textarea" value="" placeholder="Enter question text here." data-value-clear="true">
+                        </textarea>
+                    </fieldset>
+                </div>
+
+                <a data-role="button" data-inline="true" data-rel="back" data-transition="fade" href="#" data-icon="ios-pack-color-delete" data-iconpos="left" data-iconsize="26">
+                    Cancel
+                </a>
+                <a data-role="button" data-inline="true" data-transition="fade" href="#questions" data-icon="ios-pack-color-check" data-iconpos="left" data-iconsize="26" data-onsubmit="add-question">
+                    Submit
+                </a>
+            </div>
+            <div data-theme="a" data-role="footer" data-position="fixed">
+                <h3>
+                    Indeed
+                </h3>
+            </div>
+        </div>
+
+        <!-- edit-question -->
+        <div data-role="page" id="edit-question">
+            <div data-theme="a" data-role="header">
+                <h3>
+                    Edit Question
+                </h3>
+            </div>
+            <div data-role="content" style="padding: 15px">
+                <div data-role="fieldcontain">
+                    <fieldset data-role="controlgroup">
+                        <label for="edit-question-textarea">
+                        </label>
+                        <textarea id="edit-question-textarea" value="" placeholder="Enter question text here." data-value-clear="true">
+                        </textarea>
+                    </fieldset>
+                </div>
+
+                <a data-role="button" data-inline="true" data-rel="back" data-transition="fade" href="#" data-icon="ios-pack-color-delete" data-iconpos="left" data-iconsize="26">
+                    Cancel
+                </a>
+                <a data-role="button" data-inline="true" data-transition="fade" href="#questions" data-icon="ios-pack-color-check" data-iconpos="left" data-iconsize="26" data-onsubmit="edit-question">
+                    Save
+                </a>
+            </div>
+            <div data-theme="a" data-role="footer" data-position="fixed">
+                <h3>
+                    Indeed
+                </h3>
+            </div>
+        </div>
+
+
+        <script>
+        </script>
+    </body>
+</html>
