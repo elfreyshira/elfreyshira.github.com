@@ -27,7 +27,19 @@
                 </h5>
             </div>
 
+            
+
             <div data-role="content" style="padding: 15px">
+
+
+                <div data-role="fieldcontain">
+                    <ul data-role="listview" data-theme="c" id="questions-list">
+                        <li><a href="#">Action</a></li>
+                        <li><a href="#">AdventureAdventureAdventureAdventureAdventureAdventure</a></li>
+                        <li><a href="#">Comedy</a></li>
+                    </ul>
+                </div>
+
                 <!-- Questions accordian -->
                 <div data-role="collapsible-set" data-theme="" data-content-theme="" id="questions-list">
                     
@@ -72,6 +84,11 @@
                 <a data-role="button" data-rel="dialog" data-transition="pop" data-theme="b" href="#new-question" data-icon="ios-pack-color-plus" data-iconpos="right" data-iconsize="26">
                     Add Question
                 </a>
+
+                <a data-role="button" data-rel="dialog" data-transition="pop" data-theme="b" href="#" data-icon="ios-pack-color-check" data-iconpos="right" data-iconsize="26" data-onsubmit="save-questions">
+                    Save
+                </a>
+
             </div>
             <div data-theme="a" data-role="footer" data-position="fixed">
                 <h3>
@@ -174,7 +191,7 @@
                 <a data-role="button" data-inline="true" data-rel="back" data-transition="fade" href="#" data-icon="ios-pack-color-delete" data-iconpos="left" data-iconsize="26">
                     Cancel
                 </a>
-                <a data-role="button" data-inline="true" data-transition="fade" href="#questions" data-icon="ios-pack-color-check" data-iconpos="left" data-iconsize="26" data-activate="questions-list" data-activate-type="add-question">
+                <a data-role="button" data-inline="true" data-transition="fade" href="#questions" data-icon="ios-pack-color-check" data-iconpos="left" data-iconsize="26" data-onsubmit="add-question">
                     Submit
                 </a>
             </div>
