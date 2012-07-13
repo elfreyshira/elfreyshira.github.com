@@ -16,10 +16,11 @@
         </script>
         <script src="my.js"></script>
         <script src="script.js"></script>
+        <script src="mustache.js"></script>
     </head>
     <body>
         <!-- questions -->
-        <div data-role="page" data-theme="b" id="page1">
+        <div data-role="page" data-theme="b" id="questions">
             <div data-theme="a" data-role="header">
                 <h5>
                     Questions
@@ -28,20 +29,10 @@
 
             <div data-role="content" style="padding: 15px">
                 <!-- Questions accordian -->
-                <div data-role="collapsible-set" data-theme="" data-content-theme="">
-                    <!--
+                <div data-role="collapsible-set" data-theme="" data-content-theme="" id="questions-list">
+                    
 
-                    <div data-role="collapsible" data-collapsed="false">
-                        <h3>
-                            Communication skills?
-                        </h3>
-                        <div>
-                            <p>
-                                Communication skills?
-                            </p>
-                        </div>
-                    </div>
-
+<!--
                     <div data-role="collapsible" data-collapsed="false">
                         <h3>
                             Coding comprehension?
@@ -98,9 +89,9 @@
             <div data-role="content" style="padding: 15px">
                 <div data-role="fieldcontain">
                     <fieldset data-role="controlgroup">
-                        <label for="textarea1">
+                        <label for="new-question-textarea">
                         </label>
-                        <textarea id="textarea1" value="" placeholder="Enter question text here." data-value-clear="true">
+                        <textarea id="new-question-textarea" value="" placeholder="Enter question text here." data-value-clear="true">
                         </textarea>
                     </fieldset>
                 </div>
@@ -180,10 +171,10 @@
                 </div>
  -->
 
-                <a data-role="button" data-inline="true" data-rel="back" data-transition="fade" href="#page2" data-icon="ios-pack-color-delete" data-iconpos="left" data-iconsize="26">
+                <a data-role="button" data-inline="true" data-rel="back" data-transition="fade" href="#" data-icon="ios-pack-color-delete" data-iconpos="left" data-iconsize="26">
                     Cancel
                 </a>
-                <a data-role="button" data-inline="true" data-transition="fade" href="#page2" data-icon="ios-pack-color-check" data-iconpos="left" data-iconsize="26">
+                <a data-role="button" data-inline="true" data-transition="fade" href="#questions" data-icon="ios-pack-color-check" data-iconpos="left" data-iconsize="26" data-activate="questions-list" data-activate-type="add-question">
                     Submit
                 </a>
             </div>
