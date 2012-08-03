@@ -1,7 +1,0 @@
-<h1>Companies
-
-^{makeTable employerHeaders employerRow employers}
-
-<form method=post enctype=#{enctype}>
-  ^{widget}
-  <input type=submit value="Create new company">

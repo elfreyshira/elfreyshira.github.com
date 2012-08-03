@@ -1,3 +1,0 @@
-<h1>#{companyName}
-
-^{makeTable' eventCompanyRow jobs}
