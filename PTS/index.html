@@ -35,6 +35,7 @@ $(window).load(function() {
       test: "Home"
     }
     var hi = $.get("header.html");
+    console.log(hi);
     console.log(typeof hi);
 
     $("header").html(Mustache.to_html(hi,data));
