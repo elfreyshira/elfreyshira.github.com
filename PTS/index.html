@@ -34,7 +34,10 @@ $(window).load(function() {
     data = {
       test: "Home"
     }
-    hi = $.get("header.html");
+    var hi = $.get("header.html");
+    console.log(hi);
+    console.log(typeof hi);
+    var hi = hi.responseText;
     console.log(hi);
     console.log(typeof hi);
 
