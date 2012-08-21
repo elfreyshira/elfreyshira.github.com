@@ -1,3 +1,3 @@
-$(document).ready(function() {
-  $.get("test.html",alert);
-});
+// $(document).ready(function() {
+//   $.get("test.html",alert);
+// });
