@@ -34,7 +34,7 @@ $(window).load(function() {
     data = {
       test: "Home"
     }
-    $("header").load(Mustache.to_html($.get("header.html"),data));
+    $("header").html(Mustache.to_html($.get("header.html"),data));
 });
 </script>
 
