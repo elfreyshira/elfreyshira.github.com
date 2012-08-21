@@ -36,8 +36,8 @@ $(window).load(function() {
     }
     var hi = $.get("header.html", function(obj) {
       console.log(obj);
-      text = obj.responseText;
-      console.log(text);
+      // text = obj.responseText;
+      // console.log(responseText);
       $("header").html(Mustache.to_html(text,data));
     });
     // console.log(hi);
