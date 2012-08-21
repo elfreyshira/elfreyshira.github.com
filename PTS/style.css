@@ -1,0 +1,51 @@
+/*
+
+Brand Guidelines
+
+[Primary]
+Orange:
+  Web: CC5500
+  RGB: 223 96 32
+Blue:
+  Web: 0C72BA
+  RGB: 00 113 187
+
+[Secondary]
+Light Blue:
+  Web: 7FCEF0
+  RGB: 125 206 241
+Green:
+  Web: 85C446
+  RGB: 67 182 73
+Light Orange:
+  Web: FDB515
+  RGB: 253 181 21
+
+[Tertiary]  
+Fake Black:
+  Web: 161616
+  RGB: 22 22 22
+Cool Grey:
+  Web: 3F454F
+  RGB: 63 69 79
+Cooler Grey:
+  Web: 797C82
+  RGB: 121 124 130
+Brown:
+  Web: B38F55
+  RGB: 179 143 85
+Tan:
+  Web: E7DDB6
+  RGB: 231 221 182
+
+*/
+
+.nivoSlider, .nivoSlider img {
+  height: 400px;
+  width: 800px;
+  margin: 10px auto;
+}
+
+* {
+  font-family: Univers, sans-serif;
+}
