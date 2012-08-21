@@ -11,9 +11,6 @@
 
   <body>
     <header>
-      <script>
-        document.write($.get("header.html"));
-      </script>
     </header>
     <div class="slider-wrapper theme-default">
       <div id="slider" class="nivoSlider" >
@@ -32,7 +29,8 @@
 $(window).load(function() {
     $('#slider').nivoSlider();
     $("#test").load("test.html");
-    $.get("test.html");
+    // $.get("test.html");
+    $("header").load("header.html");
     alert("here!");
 });
 </script>
