@@ -34,14 +34,18 @@ $(window).load(function() {
     data = {
       test: "Home"
     }
-    var hi = $.get("header.html");
-    console.log(hi);
-    console.log(typeof hi);
-    var hi = hi.responseText;
-    console.log(hi);
-    console.log(typeof hi);
+    var hi = $.get("header.html", function(obj) {
+      console.log(obj);
+      text = obj.responseText;
+      console.log(text);
+      $("header").html(Mustache.to_html(text,data));
+    });
+    // console.log(hi);
+    // console.log(typeof hi);
+    // var hi = hi.responseText;
+    // console.log(hi);
+    // console.log(typeof hi);
 
-    $("header").html(Mustache.to_html(hi,data));
 });
 </script>
 
