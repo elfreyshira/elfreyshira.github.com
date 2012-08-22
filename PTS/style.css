@@ -50,6 +50,10 @@ Tan:
   font-family: Univers, sans-serif;
 }
 
+header {
+  height: 30px;
+}
+
 #header-bar {
   margin: 0 auto;
   width: 800px;
