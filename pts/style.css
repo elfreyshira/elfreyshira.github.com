@@ -1,0 +1,109 @@
+/*
+
+Brand Guidelines
+
+[Primary]
+Orange:
+  Web: CC5500
+  RGB: 223 96 32
+Blue:
+  Web: 0C72BA
+  RGB: 00 113 187
+
+[Secondary]
+Light Blue:
+  Web: 7FCEF0
+  RGB: 125 206 241
+Green:
+  Web: 85C446
+  RGB: 67 182 73
+Light Orange:
+  Web: FDB515
+  RGB: 253 181 21
+
+[Tertiary]  
+Fake Black:
+  Web: 161616
+  RGB: 22 22 22
+Cool Grey:
+  Web: 3F454F
+  RGB: 63 69 79
+Cooler Grey:
+  Web: 797C82
+  RGB: 121 124 130
+Brown:
+  Web: B38F55
+  RGB: 179 143 85
+Tan:
+  Web: E7DDB6
+  RGB: 231 221 182
+
+*/
+
+.nivoSlider, .nivoSlider img {
+  height: 400px;
+  /*width: 800px;*/
+  margin: 10px auto;
+}
+
+body {
+  background-color: #dddde0;
+  font-family: 'Raleway', sans-serif;
+}
+
+* {
+  margin: 0;
+}
+
+#container {
+  width: 800px;
+  margin: 0 auto;
+}
+
+header {
+  height: 33px;
+  background-color: #3F454F;
+}
+
+#header-bar {
+  margin: 0 auto;
+  width: 800px;
+  text-align: center;
+  color: white;
+}
+#header-bar div {
+  height: 20px;
+  background-color: #3F454F;
+  padding-top: 10px;
+  width: 20%;
+  float: left;
+  border-bottom: 3px solid #3F454F;
+
+  transition: background-color .1s, border .1s, transform 2s;
+  -moz-transition: background-color .1s, border .1s, -moz-transform 2s;
+  -webkit-transition: background-color .1s, border .1s, -webkit-transform 2s;
+  -o-transition: background-color .1s, border .1s,-o-transform 2s;
+
+}
+
+#header-bar div:hover {
+  background-color: #797C82;
+  border-bottom-color: #797C82;
+}
+
+#header-bar div.chosen {
+  border-bottom-color: #0C72BA;
+}
+
+#home-banner {
+  text-align: center;
+  margin: 20px auto;
+}
+#home-banner div#pts {
+  font-family: 'Great Vibes', cursive;
+  font-size: 120px;
+}
+#home-banner div#texas-kappa {
+  font-size: 50px;
+}
+
