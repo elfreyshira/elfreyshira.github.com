@@ -99,9 +99,11 @@ header {
   background-color: #797C82;
   border-bottom-color: #797C82;
 }
-
 #header-bar div.chosen {
   border-bottom-color: #0C72BA;
+}
+#header-bar a {
+  color: white;
 }
 
 #home-banner {
