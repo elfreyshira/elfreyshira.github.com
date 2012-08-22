@@ -51,10 +51,26 @@ Tan:
 }
 
 #header-bar {
-  height: 50px;
-  width: 100%;
-  background-color: #3F454F;
+  margin: 0 auto;
+  width: 800px;
+  text-align: center;
+  color: white;
 }
 #header-bar div {
-  float:left;
+  height: 20px;
+  background-color: #3F454F;
+  padding-top: 10px;
+  width: 20%;
+  float: left;
+  border-bottom: 3px solid #3F454F; 
 }
+
+#header-bar div:hover {
+  background-color: #797C82;
+  border-bottom-color: #797C82;
+}
+
+#header-bar div.chosen {
+  border-bottom-color: #0C72BA;
+}
+
