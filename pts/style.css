@@ -58,6 +58,17 @@ Azure:
 body {
   background-color: #dddde0;
   font-family: 'Raleway', sans-serif;
+  color: #161616;
+  line-height: 1.2;
+  letter-spacing: 1px;
+}
+
+a {
+  color: #0C72BA;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
 }
 
 * {
@@ -66,12 +77,18 @@ body {
 
 #container {
   width: 800px;
-  margin: 0 auto;
+  margin: 20px auto;
 }
 
 header {
   height: 33px;
+  position: fixed;
   background-color: #3F454F;
+  width: 100%;
+  top: 0;
+}
+#space {
+  height: 33px;
 }
 
 #header-bar {
@@ -118,3 +135,38 @@ header {
   font-size: 50px;
 }
 
+#sidebar {
+  width: 20%;
+  height: 1000px;
+  overflow: hidden;
+  float: left;
+  border-right: 2px solid #CC5500;
+}
+#sidebar ul {
+  position: fixed;
+}
+#sidebar li {
+  list-style-type: none;
+  margin: 10px auto;
+}
+
+
+#content {
+  width: 75%;
+  float:right;
+}
+#content h1 {
+  /*border: 2px solid #0C72BA;*/
+  border: 2px solid #7FCEF0;
+  border-radius: 10px;
+  text-align: center;
+  margin-bottom: 15px;
+  padding: 2px;
+  /*background-color: #7FCEF0;*/
+}
+#content p {
+  margin-bottom: 10px;
+}
+#content div.content-item {
+  margin-bottom: 30px;
+}
