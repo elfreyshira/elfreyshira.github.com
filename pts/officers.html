@@ -37,53 +37,62 @@
     <div id="space"></div>
 
     <div id="container">
-      <div id="sidebar">
-        <ul>
-<!--           <li> <a href="#pitausigma">Pi Tau Sigma</a> </li>
-          <li> <a href="#texaskappa">Texas Kappa</a> </li>
-          <li> <a href="#history">History</a> </li>
-          <li> <a href="#engines">Engines</a> </li> -->
-        </ul>
-      </div>
-      <div id="sidebar-line"></div>
 
-      <div id="content">
-        <div class="content-item">
-          <div class="officer">
-            <div class="officer-header">
-              <img src="images/officers/steven.jpg">
-              <h1> President </h1>
-              <h2> Steven Kanik</h2>
+          <div id="officer-template" class="hidden">
+
+          <div id="sidebar">
+            <ul>
+              {{#officers}}
+                <li> <a href="#{{#get_id}}{{name}}{{/get_id}}">{{name}}</a> </li>
+              {{/officers}}
+            </ul>
+          </div>
+
+          <div id="content">
+
+          {{#officers}}
+          <div class="content-item" id="{{#get_id}}{{name}}{{/get_id}}">
+            <div class="officer">
+              <div class="officer-header">
+                <img src="images/officers/{{image_file}}">
+                <h1> {{title}} </h1>
+                <h2> {{name}}</h2>
+              </div>
+
+              <table>
+                <tr> 
+                  <td>Email</td>
+                  <td class="officer-entry">{{email}}</td>
+                </tr>
+                <tr> 
+                  <td> Graduation </td>
+                  <td class="officer-entry">{{graduation}}</td>
+                </tr>
+                <tr> 
+                  <td> Hometown </td>
+                  <td class="officer-entry">{{hometown}}</td>
+                </tr>
+                <tr> 
+                  <td> Interests </td>
+                  <td class="officer-entry">{{interests}}</td>
+                </tr>
+                <tr> 
+                  <td> Interesting Facts </td>
+                  <td class="officer-entry">{{{interesting_fact}}}</td>
+                </tr>
+                <tr> 
+                  <td> Life Ambitions </td>
+                  <td class="officer-entry">{{life_ambitions}}</td>
+                </tr>
+              </table>
             </div>
 
-            <table>
-              <tr> 
-                <td> Email </td>
-                <td class="officer-entry"> kanik.steven@gmail.com </td>
-              </tr>
-              <tr> 
-                <td> Graduation </td>
-                <td class="officer-entry"> May 2013 </td>
-              </tr>
-              <tr> 
-                <td> Hometown </td>
-                <td class="officer-entry"> Seoul, Korea </td>
-              </tr>
-              <tr> 
-                <td> Interests </td>
-                <td class="officer-entry"> Working out, playing sports, poker, investing </td>
-              </tr>
-              <tr> 
-                <td> Interesting Facts </td>
-                <td class="officer-entry"> Living in Korea for 13 years </td>
-              </tr>
-              <tr> 
-                <td> Life Ambitions </td>
-                <td class="officer-entry"> To be a senior executive at a major oil & gas company </td>
-              </tr>
-            </table>
           </div>
-        </div>
+          {{/officers}}
+
+
+          </div>
+      </div>
 
       </div>
 

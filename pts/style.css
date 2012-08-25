@@ -61,6 +61,7 @@ body {
   color: #161616;
   line-height: 1.2;
   letter-spacing: 1px;
+  min-width: 800px;
 }
 
 table {
@@ -87,11 +88,16 @@ li {
 
 * {
   margin: 0;
+  padding: 0;
 }
 
 #container {
   width: 800px;
   margin: 20px auto;
+}
+
+.hidden {
+  display: none;
 }
 
 header {
@@ -154,11 +160,12 @@ header {
 }
 
 #sidebar {
-  width: 20%;
+  width: 160px;
   height: 1000px;
   overflow: hidden;
   float: left;
   border-right: 2px solid #CC5500;
+  position: fixed;
 }
 #sidebar ul {
   position: fixed;
