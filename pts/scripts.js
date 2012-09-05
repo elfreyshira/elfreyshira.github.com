@@ -91,6 +91,17 @@ $(document).ready(function() {
           image_file: "wynn.jpg"
         },
         {
+          title: "Actives Chair",
+          name: "Austin Wheeler",
+          email: "d28austin@aol.com",
+          graduation: "December 2012",
+          hometown: "Friendswood, Texas",
+          interests: "Kayaking, Traveling, Hunting, Golf, Soccer",
+          interesting_fact: "I hunt for reptiles every year with family members who are herpetologist.",
+          life_ambitions: "I want to work in the Upstream Oil and Gas Industry for a few years then go back to school for an MBA.",
+          image_file: "austin.png"
+        },
+        {
           title: "Historian",
           name: "John Slimp",
           email: "jaslimp09@gmail.com",
@@ -124,6 +135,17 @@ $(document).ready(function() {
           image_file: "jeff.png"
         },
         {
+          title: "Parliamentarian",
+          name: "Kevin Reedy",
+          email: "reedy.kevin@gmail.com",
+          graduation: "December 2013",
+          hometown: "The Woodlands, Texas",
+          interests: "I am a huge fan of the Game of Thrones series, both the books and the show. My favorite sport to play is Ultimate Frisbee, but I really enjoy watching soccer and baseball. In my spare time I play guitar and trumpet, and I am currently trying to reteach myself piano.",
+          interesting_fact: "My family lives in Perth, Australia, which is the exact opposite side of the globe from my hometown.",
+          life_ambitions: "I really want to work and live over seas. Who I work for is not as important, as long as I enjoy it.",
+          image_file: "kevin.png"
+        },
+        {
           title: "Webmaster",
           name: "Elfrey Shira",
           email: "elfreyshira@gmail.com",
@@ -142,50 +164,5 @@ $(document).ready(function() {
     $("#container").append($(officer_html).show());
 
   }
-
-  // hi.removeClass("hidden");
-  // console.log(hi[0]);
-  // console.log(typeof hi);
-  // console.log(Object.keys(hi));
-
-
-  function UpdateTableHeaders() {
-    $(".persist-area").each(function() {
-
-      var el              = $(this),
-          offset          = el.offset(),
-          scrollTop       = $(window).scrollTop(),
-          floatingHeader  = $(".floatingHeader", this)
-
-      if ((scrollTop > offset.top) && (scrollTop < offset.top + el.height())) {
-        floatingHeader.css({
-          "visibility": "visible"
-        });
-      } else {
-        floatingHeader.css({
-          "visibility": "hidden"
-        });      
-      };
-    });
-  }
-
-  // DOM Ready      
-  $(function() {
-
-    var clonedHeaderRow;
-
-    $(".persist-area").each(function() {
-      clonedHeaderRow = $(".persist-header", this);
-      clonedHeaderRow
-        .before(clonedHeaderRow.clone())
-        .css("width", clonedHeaderRow.width())
-        .addClass("floatingHeader");
-    });
-     
-    $(window)
-      .scroll(UpdateTableHeaders)
-      .trigger("scroll");
-     
-  });
 
 });
