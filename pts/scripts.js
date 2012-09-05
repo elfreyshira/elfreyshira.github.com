@@ -137,18 +137,55 @@ $(document).ready(function() {
       ],
       get_id: get_officer_id
     };
-    console.log(officer_template[0].innerHTML);
     var officer_html = Mustache.to_html(officer_template[0].innerHTML, data);
 
     $("#container").append($(officer_html).show());
 
-    console.log(officer_html);
-    console.log(typeof officer_html);
   }
 
   // hi.removeClass("hidden");
   // console.log(hi[0]);
   // console.log(typeof hi);
   // console.log(Object.keys(hi));
+
+
+  function UpdateTableHeaders() {
+    $(".persist-area").each(function() {
+
+      var el              = $(this),
+          offset          = el.offset(),
+          scrollTop       = $(window).scrollTop(),
+          floatingHeader  = $(".floatingHeader", this)
+
+      if ((scrollTop > offset.top) && (scrollTop < offset.top + el.height())) {
+        floatingHeader.css({
+          "visibility": "visible"
+        });
+      } else {
+        floatingHeader.css({
+          "visibility": "hidden"
+        });      
+      };
+    });
+  }
+
+  // DOM Ready      
+  $(function() {
+
+    var clonedHeaderRow;
+
+    $(".persist-area").each(function() {
+      clonedHeaderRow = $(".persist-header", this);
+      clonedHeaderRow
+        .before(clonedHeaderRow.clone())
+        .css("width", clonedHeaderRow.width())
+        .addClass("floatingHeader");
+    });
+     
+    $(window)
+      .scroll(UpdateTableHeaders)
+      .trigger("scroll");
+     
+  });
 
 });
