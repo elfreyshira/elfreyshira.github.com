@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="nivo/nivo-slider.css" type="text/css" media="screen" />
     <link rel="stylesheet" href="nivo/themes/default/default.css" type="text/css" media="screen" />  
 
-    <link href='http://fonts.googleapis.com/css?family=Raleway:100' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Orienta' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Great+Vibes' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="stylesheets/css/style.css" type="text/css" />
 
@@ -47,7 +47,7 @@
           <div id="sidebar">
             <ul>
               {{#officers}}
-                <li> <a href="#{{#get_id}}{{name}}{{/get_id}}">{{name}}</a> </li>
+                <li> <a href="#{{id}}">{{name}}</a> </li>
               {{/officers}}
             </ul>
           </div>
@@ -55,12 +55,12 @@
           <div id="content">
 
           {{#officers}}
-          <div class="content-item" id="{{#get_id}}{{name}}{{/get_id}}">
+          <div class="content-item" id="{{id}}">
             <div class="officer">
               <div class="officer-header">
                 <img src="images/officers/{{image_file}}">
                 <h1> {{title}} </h1>
-                <h2> {{name}}</h2>
+                <h2>{{name}}</h2>
               </div>
 
               <table>
@@ -105,10 +105,10 @@
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
     <script src="nivo/jquery.nivo.slider.pack.js" type="text/javascript"></script>
+    <script src="https://raw.github.com/janl/mustache.js/master/mustache.js" type="text/javascript"></script> 
     <script src="scripts.js" type="text/javascript"></script>
 
     
-    <script src="https://raw.github.com/janl/mustache.js/master/mustache.js" type="text/javascript"></script> 
     <!--
     <script src="mustache.js" type="text/javascript"></script> 
     <script src="jquery-1.6.1.min.js" type="text/javascript"></script>

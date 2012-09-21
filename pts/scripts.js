@@ -16,6 +16,7 @@ $(document).ready(function() {
         {
           title: "President",
           name: "Steven Kanik",
+          id: "steven",
           email: "kanik.steven@gmail.com",
           graduation: "May 2013",
           hometown: "Seoul, Korea",
@@ -27,6 +28,7 @@ $(document).ready(function() {
         {
           title: "Vice President",
           name: "Susan Conover",
+          id: "susan",
           email: "s.conover@utexas.edu",
           graduation: "December 2012",
           hometown: "Denton, Texas",
@@ -38,6 +40,7 @@ $(document).ready(function() {
         {
           title: "Treasurer",
           name: "Sean Knight",
+          id: "sean",
           email: "seanp2knight@hotmail.com",
           graduation: "December 2012",
           hometown: "Houston, Texas",
@@ -48,7 +51,8 @@ $(document).ready(function() {
         },
         {
           title: "Recording Secretary",
-          name: "Racher Naylor",
+          name: "Rachel Naylor",
+          id: "rachel",
           email: "rachel_naylor@utexas.edu",
           graduation: "May 2013",
           hometown: "Quanah, Texas",
@@ -60,6 +64,7 @@ $(document).ready(function() {
         {
           title: "Corporate Liaison",
           name: "Paul Tyger",
+          id: "paul",
           email: "paul.tyger@gmail.com",
           graduation: "December 2013",
           hometown: "Houston, Texas",
@@ -71,6 +76,7 @@ $(document).ready(function() {
         {
           title: "Service Chair",
           name: "Lauren Slattery",
+          id: "lauren",
           email: "LaurenAnnSlattery@gmail.com",
           graduation: "May 2013",
           hometown: "San Antonio, Texas",
@@ -82,6 +88,7 @@ $(document).ready(function() {
         {
           title: "Social Chair",
           name: "Wynn Kopriva",
+          id: "wynn",
           email: "wynnkopriva@utexas.edu",
           graduation: "May 2013",
           hometown: "Hurst, Texas",
@@ -93,6 +100,7 @@ $(document).ready(function() {
         {
           title: "Actives Chair",
           name: "Austin Wheeler",
+          id: "austin",
           email: "d28austin@aol.com",
           graduation: "December 2012",
           hometown: "Friendswood, Texas",
@@ -104,6 +112,7 @@ $(document).ready(function() {
         {
           title: "Historian",
           name: "John Slimp",
+          id: "john",
           email: "jaslimp09@gmail.com",
           graduation: "December 2013",
           hometown: "San Antonio, Texas",
@@ -115,6 +124,7 @@ $(document).ready(function() {
         {
           title: "Engines Officer",
           name: "Juan Trejo",
+          id: "juan",
           email: "jtrejo13@utexas.edu",
           graduation: "December 2012",
           hometown: "Mexico City, Mexico",
@@ -126,6 +136,7 @@ $(document).ready(function() {
         {
           title: "SEC Representative",
           name: "Jeff King",
+          id: "jeff",
           email: "JAK3819@yahoo.com",
           graduation: "May 2013",
           hometown: "San Antonio, Texas",
@@ -137,6 +148,7 @@ $(document).ready(function() {
         {
           title: "Parliamentarian",
           name: "Kevin Reedy",
+          id: "kevin",
           email: "reedy.kevin@gmail.com",
           graduation: "December 2013",
           hometown: "The Woodlands, Texas",
@@ -148,6 +160,7 @@ $(document).ready(function() {
         {
           title: "Webmaster",
           name: "Elfrey Shira",
+          id: "elfrey",
           email: "elfreyshira@gmail.com",
           graduation: "May 2013",
           hometown: "Arlington, Texas",
@@ -159,7 +172,9 @@ $(document).ready(function() {
       ],
       get_id: get_officer_id
     };
+    console.log(data);
     var officer_html = Mustache.to_html(officer_template[0].innerHTML, data);
+    console.log(officer_html);
 
     $("#container").append($(officer_html).show());
 
