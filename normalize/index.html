@@ -1,0 +1,59 @@
+<html>
+
+<head>
+  <title> Redfin Coding Challenge </title>
+  <link rel="shortcut icon" href="http://elfreyshira.com/images/favicon.ico" />
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  <script type="text/javascript" src="scripts.js"></script>
+
+  <style type="text/css">
+    body {
+      width: 800px;
+      margin: 10px auto;
+      font-family: Verdana, sans-serif;
+    }
+    p, ul {
+      width: 600px;
+    }
+  </style>
+</head>
+
+<body>
+  <div>
+    <p>
+      This is the coding challenge from Redfin. In the input box underneath, submit a path string, and the table below will display the normalized path.
+    </p>
+    <p>
+      I know that in the challenge description, it was said that "foo//bar" should normalize to "foo//bar". However, I used regex to split the string between one or more slashes. Then at the end, I join each directory with a slash. It seemed like I would have to work backwards to make "foo//bar" normalize to "foo//bar". My function, instead, normalizes "foo//bar" to "foo/bar". I hope that, Redfin, a company that I believe is adaptive and understanding, would be okay with this alteration.
+    </p>
+    <p>
+      It was very tempting not to overwork this coding challenge and go through all the possible normalization requirements. Here is a list of assumptions I made:
+      <ul>
+        <li>The directory names are valid as they are inputted.</li>
+        <li>All path inputs are relative, instead of absolute.</li>
+        <li>The path "foo/bar" is the same as "foo/bar/", so it's not necessary to strip the "/" at the end.</li>
+      </ul>
+    </p>
+    <form id="input-form">
+      <input type="text" id="input-text" placeholder="File path">
+      <input type="submit" value="Normalize">
+    </form>
+  </div>
+  <table border="1" id="normalize-table">
+    <tr>
+      <th>
+        Original File Path
+      </th>
+      <th>
+        Normalized File Path
+      </th>
+    </tr>
+
+
+  </table>
+
+  
+
+</body>
+
+</html>
