@@ -22,7 +22,6 @@ $(document).ready(function() {
    * Takes in a file path as a string and normalizes it.
    * ex:   foo/./bar       --> foo/bar
    *       foo/bar/../baz  --> foo/baz
-   *       foo//bar        --> foo//bar
    *
    * @param {String} str
    * @return {String}
