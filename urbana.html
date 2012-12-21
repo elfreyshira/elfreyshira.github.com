@@ -13,6 +13,7 @@
     .container {
       width: 600px;
       margin-left: 260px;
+      background-color: #fafafa;
     }
     .seminar {
       border-bottom: 1px solid #aaa;
@@ -45,6 +46,11 @@
     #reset:hover {
       color: #b22;
       cursor: pointer;
+    }
+    #logo {
+      position:fixed;
+      right: 20px;
+      z-index: -1;
     }
   </style>
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js">
@@ -122,6 +128,7 @@
     </div>
   </div>
   <div class='container'>
+    <img id='logo' src="http://blog.emergingscholars.org/wp-content/uploads/2012/05/urbana_12_logo.png">
 
     <h1 class='title' id='ev'> Evangelism </h1>
     <div class='seminar'>
