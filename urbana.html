@@ -7,6 +7,7 @@
       color: #222;
       background-color: #fafafa;
       font-family: sans-serif;
+      font-size: 14px;
     }
     .container {
       width: 600px;
@@ -14,45 +15,115 @@
     }
     .seminar {
       border-bottom: 1px solid #aaa;
-      font-size: 14px;
     }
-    .seminar h3 {
+    h3 {
       font-size: 16px;
+    }
+    .seminar h3:hover {
+      color: #229;
+      cursor: pointer;
     }
     .title {
       margin-top: 60px;
       border: 2px solid #aaa;
       text-align: center;
     }
-    #seminar-links {
+    #sidebar {
       position: fixed;
-      width: 300px;
-      font-size: 14px;
+      background-color: #fafafa;
+      width: 250px;
+      top: 0px;
     }
-    #seminar-links li {
-      width: 200px;
+    .bookmark {
+      font-size: 12px;
+    }
+    .bookmark:hover {
+      color: #922;
+      cursor: pointer;
+    }
+    #reset:hover {
+      color: #b22;
+      cursor: pointer;
     }
   </style>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js">
+  </script>
+  <script>
+    $(document).ready(function(){
+      if(typeof(Storage)!=="undefined") {
+        if (localStorage) {
+          bookmarks_list = Object.keys(localStorage);
+          for (var i = 0; i < bookmarks_list.length; i++) {
+
+            var new_bookmark = $('<li class="bookmark">'+bookmarks_list[i]+'</li>');
+            $('#bookmark-list').append(new_bookmark);
+          };
+          $('.bookmark').click(function(){
+            remove_bookmark($(this));
+          });
+        }
+      }
+      $('.seminar h3').click(function(){
+        var title = this.innerHTML;
+        var new_bookmark = $('<li class="bookmark">'+title+'</li>');
+        if(typeof(Storage)!=="undefined" && !localStorage[title]){
+          $('#bookmark-list').append(new_bookmark);
+        }
+        if(typeof(Storage)!=="undefined") {
+          localStorage[title] = true;
+        }
+        new_bookmark.click(function(){
+          remove_bookmark($(this));
+        });
+      });
+
+      var remove_bookmark = function(clicked) {
+        var title = clicked.html();
+        clicked.remove();
+        if(typeof(Storage)!=="undefined") {
+          delete localStorage[title];
+        }
+
+      }
+      
+    });
+  </script>
 </head>
 <body>
-  <ol id='seminar-links'>
-      <li> <a href="#ev">Evangelism</a> </li>
-      <li> <a href="#rg">Ready to Go</a> </li>
-      <li> <a href="#lv">Live and Learn 58</a> </li>
-      <li> <a href="#gu">Growing in Understanding of Missions</a> </li>
-      <li> <a href="#gm">Global Issues in Missions</a> </li>
-      <li> <a href="#pj">Poverty and Justice</a> </li>
-      <li> <a href="#pn">Proclamation</a> </li>
-      <li> <a href="#ms">Missions in Every Sector</a> </li>
-      <li> <a href="#mh">The Mission of Healthcare</a> </li>
-      <li> <a href="#hs">The Heart and Soul of Missions</a> </li>
-      <li> <a href="#wr">World Religions</a> </li>
-  </ol>
+  <div id='sidebar'>
+    <h3> Shortcuts </h3>
+    <ol id='seminar-links'>
+        <li> <a href="#ev">Evangelism</a> </li>
+        <li> <a href="#rg">Ready to Go</a> </li>
+        <li> <a href="#lv">Live and Learn 58</a> </li>
+        <li> <a href="#gu">Growing in Understanding of Missions</a> </li>
+        <li> <a href="#gm">Global Issues in Missions</a> </li>
+        <li> <a href="#pj">Poverty and Justice</a> </li>
+        <li> <a href="#pn">Proclamation</a> </li>
+        <li> <a href="#ms">Missions in Every Sector</a> </li>
+        <li> <a href="#mh">The Mission of Healthcare</a> </li>
+        <li> <a href="#hs">The Heart and Soul of Missions</a> </li>
+        <li> <a href="#wr">World Religions</a> </li>
+    </ol>
+    <br>
+    <div id='bookmarked'>
+      <h3>Bookmarked Seminars</h3>
+      <p>
+        To bookmark: click on title on right <br>
+        To delete bookmark: click on title below <br>
+        To reset: click <span id='reset' onclick="localStorage.clear(); $('.bookmark').remove();">[here]</span>
+
+      </p>
+      <ul id='bookmark-list'>
+
+      </ul>
+    </div>
+  </div>
   <div class='container'>
 
     <h1 class='title' id='ev'> Evangelism </h1>
     <div class='seminar'>
-      <h3>EV32 Receiving the Father's Love: Good News for Honor/Shame Cultures</h3>
+      <h3>EV32 Receiving the Father's Love: Good News for Honor/Shame Cultures </h3>
       <p>Original sin led to shame, pain and weakness as well as guilt.  How does the Father's unconditional love meet us in these conditions?  How do we read the Bible with an honor/shame lens?  Come discover how to share the gospel effectively in cultures where honor/shame is an integral part of the worldview!</p>
       <p><i>Eva Liu Glick, Katie Rawson</i></p>
     </div>
