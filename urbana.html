@@ -52,11 +52,23 @@
       right: 20px;
       z-index: -1;
     }
+    #bookmark-list {
+      /*height: 400px;*/
+      overflow-y: scroll;
+      /*resize: vertical;*/
+    }
   </style>
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js">
   </script>
   <script>
     $(document).ready(function(){
+
+      var resize_bookmark_list = function(subtracted_height) {
+        $('#bookmark-list').css('height',($(window).height()-subtracted_height).toString()+'px');
+      }
+
+      resize_bookmark_list(400);
+
       if(typeof(Storage)!=="undefined") {
         if (localStorage) {
           bookmarks_list = Object.keys(localStorage);
@@ -84,14 +96,22 @@
         });
       });
 
+      $(window).resize(function() {
+        // console.log(($(window).height()-300).toString()+'px');
+        resize_bookmark_list(400);
+      });
+
       var remove_bookmark = function(clicked) {
         var title = clicked.html();
         clicked.remove();
         if(typeof(Storage)!=="undefined") {
           delete localStorage[title];
         }
-
       }
+
+      // var resize_bookmark_list = function(subtracted_height) {
+      //   $('#bookmark-list').css('height',($(window).height()-subtracted_height).toString()+'px');
+      // }
       
     });
   </script>
