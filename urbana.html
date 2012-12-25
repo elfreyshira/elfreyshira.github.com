@@ -47,21 +47,28 @@
       color: #b22;
       cursor: pointer;
     }
+    #share:hover {
+      color: #2b2;
+      cursor: pointer;
+    }
     #logo {
       position:fixed;
       right: 20px;
       z-index: -1;
     }
     #bookmark-list {
-      /*height: 400px;*/
       overflow: auto;
-      /*resize: vertical;*/
     }
   </style>
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js">
   </script>
   <script>
+    storage_exists = (typeof(Storage)!=="undefined");
     $(document).ready(function(){
+
+      // var share_seminars = function() {
+      //   prompt("What is your name");
+      // };
 
       var resize_bookmark_list = function(subtracted_height) {
         $('#bookmark-list').css('height',($(window).height()-subtracted_height).toString()+'px');
@@ -69,7 +76,7 @@
 
       resize_bookmark_list(400);
 
-      if(typeof(Storage)!=="undefined") {
+      if(storage_exists) {
         if (localStorage) {
           bookmarks_list = Object.keys(localStorage);
           for (var i = 0; i < bookmarks_list.length; i++) {
@@ -88,7 +95,7 @@
         if(typeof(Storage)!=="undefined" && !localStorage[title]){
           $('#bookmark-list').append(new_bookmark);
         }
-        if(typeof(Storage)!=="undefined") {
+        if(storage_exists) {
           localStorage[title] = true;
         }
         new_bookmark.click(function(){
@@ -97,8 +104,32 @@
       });
 
       $(window).resize(function() {
-        // console.log(($(window).height()-300).toString()+'px');
         resize_bookmark_list(400);
+      });
+
+      $("#share").click(function() {
+        var name = prompt("What is your name?")
+        if (!name) { return; }
+
+        var selected_bookmarks = $(".bookmark");
+        var bookmarks = [];
+        var numeric_code = "";
+        var check_code = 0;
+        for (var i=0; i<selected_bookmarks.length; i++) {
+          var this_num_code = titles_map[selected_bookmarks[i].innerText];
+          numeric_code += this_num_code;
+          check_code += parseInt(this_num_code);
+        }
+
+        var numberic_check_code = "0000"+check_code;
+        numberic_check_code=numberic_check_code.substring(numberic_check_code.length-4,numberic_check_code.length);
+
+        var final_code = check_code.toString(16)+"z"+numeric_code;
+
+        console.log(location.href.split("/").slice(0,-1).join("/")+"/share.html?n="+name+"&q="+final_code);
+
+
+
       });
 
       var remove_bookmark = function(clicked) {
@@ -107,13 +138,295 @@
         if(typeof(Storage)!=="undefined") {
           delete localStorage[title];
         }
-      }
-
-      // var resize_bookmark_list = function(subtracted_height) {
-      //   $('#bookmark-list').css('height',($(window).height()-subtracted_height).toString()+'px');
-      // }
+      };
       
     });
+
+
+    // var all_titles = ["EV32 Receiving the Father's Love: Good News for Honor/Shame Cultures",
+    //   "EV31 Making All Things New: Engaging Culture through the Lens of Social Justice",
+    //   "EV28 Making Disciples: From Skeptics to World-Changers",
+    //   "EV27 Start Something New",
+    //   "EV26 New Paradigms in Jewish Ministry",
+    //   "EV25 Creative Campus Activism",
+    //   "EV23 Starting a Cross-Cultural Evangelistic Bible Study",
+    //   "EV22 Reaching International Students on Campus",
+    //   "EV21 Popping the Question Cross-Culturally",
+    //   "EV12 Evangelism through the Gospel of Luke",
+    //   "EV11 Responding to the New Atheism",
+    //   "RG51 A New Kind of Missionary: Using Your Degree and Serving Globally",
+    //   "RG41 Fund Raising as Ministry",
+    //   "RG30 December 30 Meet-up: Continuing the Journey",
+    //   "RG29 December 29 Meet-up: Make the Most of your Exhibit Hall Experience!",
+    //   "RG28 December 28 Meet-up: Get Ready",
+    //   "RG15 Fundraising Strategies for People of Color",
+    //   "RG14 Cross-Cultural Mission as Crucible for Spiritual Transformation",
+    //   "RG13 Getting Ready to Serve: Top 10 Steps to Effective Crosscultural Service",
+    //   "RG12 Five Keys to Raise Your Ministry Support",
+    //   "RG11 Discerning the Missionary Call",
+    //   "LV30 You Ending Extreme Poverty: Trafficking",
+    //   "LV29 You Ending Extreme Poverty: Slums",
+    //   "LV28 You Ending Extreme Poverty: Slavery",
+    //   "GU82 Exploring Cultural Assumptions",
+    //   "GU81 Engaging in Rural Cross-Cultural Missions",
+    //   "GU54 Transform Your Campus through Short-Term Missions",
+    //   "GU52 Lessons from the Global South for the West",
+    //   "GU51 The Role of Short-Term Missions in Building Worshipers",
+    //   "GU41 Opportunities for Women in Leadership in Missions",
+    //   "GU22 The Challenge of the Church in Egypt",
+    //   "GU21 What Does it Mean to be a Follower of Jesus in Palestine?",
+    //   "GU16 Cross-Cultural Complexities: Friendship, Money & Partnership",
+    //   "GU14 Where Do North Americans Fit in Global Mission?",
+    //   "GU13 Six Ways to Reach God's World",
+    //   "GU12 World Changers: Introduction to Missions",
+    //   "GU11 Becoming a Global Christian",
+    //   "GM81 Global Partnership: Towards More Effective Kingdom Impact Across Cultures",
+    //   "GM72 HIV on Campuses in Francophone Africa",
+    //   "GM71 Evangelism in Post-Modern Countries",
+    //   "GM62 Welcoming the Stranger in Today's Immigration System",
+    //   "GM61 Thinking Theologically about Immigration",
+    //   "GM53 The Unengaged Peoples: Who Will Be the Voice of the Church That Isn't (Yet)?",
+    //   "GM52 The Unengaged Peoples: Who Are They and Why Should You Care",
+    //   "GM51 The Unengaged Peoples: What it Takes to Be the First to Tell Them",
+    //   "GM45 Seek God. Seek Justice.",
+    //   "GM44 Ending Gendercide and Proclaiming Christ's Redemption in China and India",
+    //   "GM43 Homosexuality and the Church: A Meditation on the Tragic",
+    //   "GM42 A Christian Response to Homosexuality",
+    //   "GM41 Creating Community for At-Risk Children and Youth",
+    //   "GM33 Embracing your Ethnicity, Empowering Yourself for Missions",
+    //   "GM32 The Impact of Racial Reconcilation in Missions",
+    //   "GM31 Â¡Vamonos! Envisioning the Future of Black and Hispanic Mobilization",
+    //   "GM23 The Environment, a Biblical Responsibility",
+    //   "GM22 The Environmentalist's Dilemma: Plants or People?",
+    //   "GM21 Environmental Missions: Bringing Christ the Creator to the Least-Reached",
+    //   "GM11 Suffering and Faith",
+    //   "PJ22 Women and Incarnation",
+    //   "PJ21 The Experimental Orientation: Life in a Slum",
+    //   "PJ14 Simple Living for Just Giving",
+    //   "PJ13 Gaining Access to the Pond: Advocacy in Mission",
+    //   "PJ12 What it Takes to Transform Your City",
+    //   "PJ11 Connecting with God's Heart for the Poor, the Work of Love and Justice",
+    //   "PN92 Deny Yourself, But Don't Deny Your Gifts",
+    //   "PN91 Business as Mission: A New Frontier",
+    //   "PN75 Being a Strategic Investor in Global Missions",
+    //   "PN74 Student Ministry in Cuba",
+    //   "PN73 How to Partner with the Student Ministry in Mexico and Central America",
+    //   "PN72 Serving and Surviving in the Mission Field in an African Context",
+    //   "PN71 Missions Opportunities in the Caribbean",
+    //   "PN54 The Ministry of University Teaching",
+    //   "PN53 Serving God as a Professor Overseas",
+    //   "PN52 Reaching and Teaching the Oral World",
+    //   "PN51 English Language Teaching and Missions: Potential, Pitfalls, and Best Practices",
+    //   "PN48 What is Drama in Mission?",
+    //   "PN47 Musicians Living Fully in Christ",
+    //   "PN46 Worship at Urbana: Why does it look this way?",
+    //   "PN45 We Have the Best Story: Performing Arts In Mission",
+    //   "PN44 Is Music Really a \"Universal\" Language?",
+    //   "PN43 Music Shaping Faith and Practice of the Church",
+    //   "PN42 Creating Biblically-Based Songs for Oral Cultures",
+    //   "PN41 Biblical Foundations of Multicultural Worship: Glorfiying God and Impacting the World",
+    //   "PN32 The Church That Meets In Your House",
+    //   "PN31 Church Planting Movements",
+    //   "PN21 Developing World Design: Architects and Engineers in Mission",
+    //   "PN01 Sports Ministry: Strategic in God's Kingdom Expansion",
+    //   "MS83 Flourishing and Floundering as a Filmmaker",
+    //   "MS82 Proclaiming the Gospel through the Arts",
+    //   "MS81 Where in the Bible Does It Say that God Likes Artists and the Arts?",
+    //   "MS71 Politics! Why Bother?!",
+    //   "MS61 Christians in Journalism",
+    //   "MS53 Women and the Academic Life",
+    //   "MS52 Serving Christ as a Professor",
+    //   "MS51 Graduate School for God's Global Mission",
+    //   "MS34 The Power of Business to Transform",
+    //   "MS33 Business and Mission: Serving God on Wall Street",
+    //   "MS32 Vocational Missionaries: Global Mission through Global Business",
+    //   "MS31 Tentmaking to Create Solutions to Ultrapoverty",
+    //   "MS30 Microfinance and Missions: How Savings and Small Loans Can Make a Big Difference",
+    //   "MS29 Listening to Jesus in Corporate America",
+    //   "MS28 Learning about Business as Mission from the Life of Joseph",
+    //   "MS27 High Tech Entrepreneurship 101 for the Mission-Minded",
+    //   "MS26 Why Business Matters to the World and to God",
+    //   "MS25 The Creative Capacity of Global Business to Bring Transformation",
+    //   "MS24 Business People and the Church: Why Bother?",
+    //   "MS23 Business as Mission, A Life Plan",
+    //   "MS22 Business as Mission: Best and Worst Practices Unplugged",
+    //   "MS21 At the Intersection of Church and Business: Announcing the Kingdom of God",
+    //   "MS14 Stories of the Ordinary",
+    //   "MS13 Advancing the Kingdom Through Your Vocation",
+    //   "MS12 Mission-Based Ethics for a Challenging World",
+    //   "MS11 Exploring God's Call to the Marketplace: A Biblical Theology of Work",
+    //   "MH33 Health Care for Orphaned and Vulnerable Children",
+    //   "MH32 Healthcare Ministry in Chronic Illness and Disability",
+    //   "MH31 Health Care Ministry for Exploited and Trafficked People",
+    //   "MH21 Teaching in the Healthcare Professions as Missions",
+    //   "MH13 Professional Preparation for Healthcare Missions",
+    //   "MH12 God's Call to the Healthcare Professional",
+    //   "MH11 The Biblical Basis of Healthcare Missions",
+    //   "HS47 The Rest of the Story: Meet the Older Son",
+    //   "HS46 Christians in Holistic Missions and Community Development",
+    //   "HS45 The Daily Life of Disciple-Making Disciple",
+    //   "HS44 Jesus Follower? A Daily Life",
+    //   "HS43 Contemplative Activism",
+    //   "HS42 Practicing the Way of Jesus: Taking Action Together",
+    //   "HS41 Understanding the Concept and Cost of Missions",
+    //   "HS23 Ethnicity and Prayer",
+    //   "HS21 Growing Your Prayer Life and Reaching the Campus Community",
+    //   "HS15 Taking Luke Manuscript Study Back to Campus and Church",
+    //   "HS14 Theology of Suffering",
+    //   "HS13 Spiritual Warfare and Mission",
+    //   "HS12 Reading the Bible with Joy",
+    //   "HS11 Prayer, Fasting and Worship for Mission",
+    //   "WR61 Catholics and Protestants in Missional Partnership",
+    //   "WR51 Paradigms and Questions from the Eastern Orthodox Church",
+    //   "WR41 Judaism 101",
+    //   "WR33 Mission to the Hindu World",
+    //   "WR31 Engaging Your Hindu Neighbor",
+    //   "WR23 Fresh Vision for the Muslim World",
+    //   "WR22 Islamic Terrorism and the Arab Spring",
+    //   "WR21 Islam and Christianity: Tensions and Connections"];
+
+      titles_map = {"EV32 Receiving the Father's Love: Good News for Honor/Shame Cultures":"000",
+        "EV31 Making All Things New: Engaging Culture through the Lens of Social Justice":"001",
+        "EV28 Making Disciples: From Skeptics to World-Changers":"002",
+        "EV27 Start Something New":"003",
+        "EV26 New Paradigms in Jewish Ministry":"004",
+        "EV25 Creative Campus Activism":"005",
+        "EV23 Starting a Cross-Cultural Evangelistic Bible Study":"006",
+        "EV22 Reaching International Students on Campus":"007",
+        "EV21 Popping the Question Cross-Culturally":"008",
+        "EV12 Evangelism through the Gospel of Luke":"009",
+        "EV11 Responding to the New Atheism":"010",
+        "RG51 A New Kind of Missionary: Using Your Degree and Serving Globally":"011",
+        "RG41 Fund Raising as Ministry":"012",
+        "RG30 December 30 Meet-up: Continuing the Journey":"013",
+        "RG29 December 29 Meet-up: Make the Most of your Exhibit Hall Experience!":"014",
+        "RG28 December 28 Meet-up: Get Ready":"015",
+        "RG15 Fundraising Strategies for People of Color":"016",
+        "RG14 Cross-Cultural Mission as Crucible for Spiritual Transformation":"017",
+        "RG13 Getting Ready to Serve: Top 10 Steps to Effective Crosscultural Service":"018",
+        "RG12 Five Keys to Raise Your Ministry Support":"019",
+        "RG11 Discerning the Missionary Call":"020",
+        "LV30 You Ending Extreme Poverty: Trafficking":"021",
+        "LV29 You Ending Extreme Poverty: Slums":"022",
+        "LV28 You Ending Extreme Poverty: Slavery":"023",
+        "GU82 Exploring Cultural Assumptions":"024",
+        "GU81 Engaging in Rural Cross-Cultural Missions":"025",
+        "GU54 Transform Your Campus through Short-Term Missions":"026",
+        "GU52 Lessons from the Global South for the West":"027",
+        "GU51 The Role of Short-Term Missions in Building Worshipers":"028",
+        "GU41 Opportunities for Women in Leadership in Missions":"029",
+        "GU22 The Challenge of the Church in Egypt":"030",
+        "GU21 What Does it Mean to be a Follower of Jesus in Palestine?":"031",
+        "GU16 Cross-Cultural Complexities: Friendship, Money & Partnership":"032",
+        "GU14 Where Do North Americans Fit in Global Mission?":"033",
+        "GU13 Six Ways to Reach God's World":"034",
+        "GU12 World Changers: Introduction to Missions":"035",
+        "GU11 Becoming a Global Christian":"036",
+        "GM81 Global Partnership: Towards More Effective Kingdom Impact Across Cultures":"037",
+        "GM72 HIV on Campuses in Francophone Africa":"038",
+        "GM71 Evangelism in Post-Modern Countries":"039",
+        "GM62 Welcoming the Stranger in Today's Immigration System":"040",
+        "GM61 Thinking Theologically about Immigration":"041",
+        "GM53 The Unengaged Peoples: Who Will Be the Voice of the Church That Isn't (Yet)?":"042",
+        "GM52 The Unengaged Peoples: Who Are They and Why Should You Care":"043",
+        "GM51 The Unengaged Peoples: What it Takes to Be the First to Tell Them":"044",
+        "GM45 Seek God. Seek Justice.":"045",
+        "GM44 Ending Gendercide and Proclaiming Christ's Redemption in China and India":"046",
+        "GM43 Homosexuality and the Church: A Meditation on the Tragic":"047",
+        "GM42 A Christian Response to Homosexuality":"048",
+        "GM41 Creating Community for At-Risk Children and Youth":"049",
+        "GM33 Embracing your Ethnicity, Empowering Yourself for Missions":"050",
+        "GM32 The Impact of Racial Reconcilation in Missions":"051",
+        "GM31 Ã‚Â¡Vamonos! Envisioning the Future of Black and Hispanic Mobilization":"052",
+        "GM23 The Environment, a Biblical Responsibility":"053",
+        "GM22 The Environmentalist's Dilemma: Plants or People?":"054",
+        "GM21 Environmental Missions: Bringing Christ the Creator to the Least-Reached":"055",
+        "GM11 Suffering and Faith":"056",
+        "PJ22 Women and Incarnation":"057",
+        "PJ21 The Experimental Orientation: Life in a Slum":"058",
+        "PJ14 Simple Living for Just Giving":"059",
+        "PJ13 Gaining Access to the Pond: Advocacy in Mission":"060",
+        "PJ12 What it Takes to Transform Your City":"061",
+        "PJ11 Connecting with God's Heart for the Poor, the Work of Love and Justice":"062",
+        "PN92 Deny Yourself, But Don't Deny Your Gifts":"063",
+        "PN91 Business as Mission: A New Frontier":"064",
+        "PN75 Being a Strategic Investor in Global Missions":"065",
+        "PN74 Student Ministry in Cuba":"066",
+        "PN73 How to Partner with the Student Ministry in Mexico and Central America":"067",
+        "PN72 Serving and Surviving in the Mission Field in an African Context":"068",
+        "PN71 Missions Opportunities in the Caribbean":"069",
+        "PN54 The Ministry of University Teaching":"070",
+        "PN53 Serving God as a Professor Overseas":"071",
+        "PN52 Reaching and Teaching the Oral World":"072",
+        "PN51 English Language Teaching and Missions: Potential, Pitfalls, and Best Practices":"073",
+        "PN48 What is Drama in Mission?":"074",
+        "PN47 Musicians Living Fully in Christ":"075",
+        "PN46 Worship at Urbana: Why does it look this way?":"076",
+        "PN45 We Have the Best Story: Performing Arts In Mission":"077",
+        "PN44 Is Music Really a \"Universal\" Language?":"078",
+        "PN43 Music Shaping Faith and Practice of the Church":"079",
+        "PN42 Creating Biblically-Based Songs for Oral Cultures":"080",
+        "PN41 Biblical Foundations of Multicultural Worship: Glorfiying God and Impacting the World":"081",
+        "PN32 The Church That Meets In Your House":"082",
+        "PN31 Church Planting Movements":"083",
+        "PN21 Developing World Design: Architects and Engineers in Mission":"084",
+        "PN01 Sports Ministry: Strategic in God's Kingdom Expansion":"085",
+        "MS83 Flourishing and Floundering as a Filmmaker":"086",
+        "MS82 Proclaiming the Gospel through the Arts":"087",
+        "MS81 Where in the Bible Does It Say that God Likes Artists and the Arts?":"088",
+        "MS71 Politics! Why Bother?!":"089",
+        "MS61 Christians in Journalism":"090",
+        "MS53 Women and the Academic Life":"091",
+        "MS52 Serving Christ as a Professor":"092",
+        "MS51 Graduate School for God's Global Mission":"093",
+        "MS34 The Power of Business to Transform":"094",
+        "MS33 Business and Mission: Serving God on Wall Street":"095",
+        "MS32 Vocational Missionaries: Global Mission through Global Business":"096",
+        "MS31 Tentmaking to Create Solutions to Ultrapoverty":"097",
+        "MS30 Microfinance and Missions: How Savings and Small Loans Can Make a Big Difference":"098",
+        "MS29 Listening to Jesus in Corporate America":"099",
+        "MS28 Learning about Business as Mission from the Life of Joseph":"100",
+        "MS27 High Tech Entrepreneurship 101 for the Mission-Minded":"101",
+        "MS26 Why Business Matters to the World and to God":"102",
+        "MS25 The Creative Capacity of Global Business to Bring Transformation":"103",
+        "MS24 Business People and the Church: Why Bother?":"104",
+        "MS23 Business as Mission, A Life Plan":"105",
+        "MS22 Business as Mission: Best and Worst Practices Unplugged":"106",
+        "MS21 At the Intersection of Church and Business: Announcing the Kingdom of God":"107",
+        "MS14 Stories of the Ordinary":"108",
+        "MS13 Advancing the Kingdom Through Your Vocation":"109",
+        "MS12 Mission-Based Ethics for a Challenging World":"110",
+        "MS11 Exploring God's Call to the Marketplace: A Biblical Theology of Work":"111",
+        "MH33 Health Care for Orphaned and Vulnerable Children":"112",
+        "MH32 Healthcare Ministry in Chronic Illness and Disability":"113",
+        "MH31 Health Care Ministry for Exploited and Trafficked People":"114",
+        "MH21 Teaching in the Healthcare Professions as Missions":"115",
+        "MH13 Professional Preparation for Healthcare Missions":"116",
+        "MH12 God's Call to the Healthcare Professional":"117",
+        "MH11 The Biblical Basis of Healthcare Missions":"118",
+        "HS47 The Rest of the Story: Meet the Older Son":"119",
+        "HS46 Christians in Holistic Missions and Community Development":"120",
+        "HS45 The Daily Life of Disciple-Making Disciple":"121",
+        "HS44 Jesus Follower? A Daily Life":"122",
+        "HS43 Contemplative Activism":"123",
+        "HS42 Practicing the Way of Jesus: Taking Action Together":"124",
+        "HS41 Understanding the Concept and Cost of Missions":"125",
+        "HS23 Ethnicity and Prayer":"126",
+        "HS21 Growing Your Prayer Life and Reaching the Campus Community":"127",
+        "HS15 Taking Luke Manuscript Study Back to Campus and Church":"128",
+        "HS14 Theology of Suffering":"129",
+        "HS13 Spiritual Warfare and Mission":"130",
+        "HS12 Reading the Bible with Joy":"131",
+        "HS11 Prayer, Fasting and Worship for Mission":"132",
+        "WR61 Catholics and Protestants in Missional Partnership":"133",
+        "WR51 Paradigms and Questions from the Eastern Orthodox Church":"134",
+        "WR41 Judaism 101":"135",
+        "WR33 Mission to the Hindu World":"136",
+        "WR31 Engaging Your Hindu Neighbor":"137",
+        "WR23 Fresh Vision for the Muslim World":"138",
+        "WR22 Islamic Terrorism and the Arab Spring":"139",
+        "WR21 Islam and Christianity: Tensions and Connections":"140"}
+
   </script>
 
   <!-- Google Analytics -->
@@ -155,7 +468,8 @@
       <p>
         To bookmark: click on title on right <br>
         To delete bookmark: click on title below <br>
-        To reset: click <span id='reset' onclick="localStorage.clear(); $('.bookmark').remove();">[here]</span>
+        To reset: click <span id='reset' onclick="if (confirm('Are you sure you want to reset your bookmarks?')) {localStorage.clear(); $('.bookmark').remove();}">[here]</span> <br>
+        To share: click <span id='share'>[here]</span>
 
       </p>
       <ul id='bookmark-list'>

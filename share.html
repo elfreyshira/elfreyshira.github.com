@@ -1,0 +1,215 @@
+<html>
+  <head>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js">
+    </script>
+    
+    <script>
+      var all_titles = [
+        "EV32 Receiving the Father's Love: Good News for Honor/Shame Cultures",
+        "EV31 Making All Things New: Engaging Culture through the Lens of Social Justice",
+        "EV28 Making Disciples: From Skeptics to World-Changers",
+        "EV27 Start Something New",
+        "EV26 New Paradigms in Jewish Ministry",
+        "EV25 Creative Campus Activism",
+        "EV23 Starting a Cross-Cultural Evangelistic Bible Study",
+        "EV22 Reaching International Students on Campus",
+        "EV21 Popping the Question Cross-Culturally",
+        "EV12 Evangelism through the Gospel of Luke",
+        "EV11 Responding to the New Atheism",
+        "RG51 A New Kind of Missionary: Using Your Degree and Serving Globally",
+        "RG41 Fund Raising as Ministry",
+        "RG30 December 30 Meet-up: Continuing the Journey",
+        "RG29 December 29 Meet-up: Make the Most of your Exhibit Hall Experience!",
+        "RG28 December 28 Meet-up: Get Ready",
+        "RG15 Fundraising Strategies for People of Color",
+        "RG14 Cross-Cultural Mission as Crucible for Spiritual Transformation",
+        "RG13 Getting Ready to Serve: Top 10 Steps to Effective Crosscultural Service",
+        "RG12 Five Keys to Raise Your Ministry Support",
+        "RG11 Discerning the Missionary Call",
+        "LV30 You Ending Extreme Poverty: Trafficking",
+        "LV29 You Ending Extreme Poverty: Slums",
+        "LV28 You Ending Extreme Poverty: Slavery",
+        "GU82 Exploring Cultural Assumptions",
+        "GU81 Engaging in Rural Cross-Cultural Missions",
+        "GU54 Transform Your Campus through Short-Term Missions",
+        "GU52 Lessons from the Global South for the West",
+        "GU51 The Role of Short-Term Missions in Building Worshipers",
+        "GU41 Opportunities for Women in Leadership in Missions",
+        "GU22 The Challenge of the Church in Egypt",
+        "GU21 What Does it Mean to be a Follower of Jesus in Palestine?",
+        "GU16 Cross-Cultural Complexities: Friendship, Money & Partnership",
+        "GU14 Where Do North Americans Fit in Global Mission?",
+        "GU13 Six Ways to Reach God's World",
+        "GU12 World Changers: Introduction to Missions",
+        "GU11 Becoming a Global Christian",
+        "GM81 Global Partnership: Towards More Effective Kingdom Impact Across Cultures",
+        "GM72 HIV on Campuses in Francophone Africa",
+        "GM71 Evangelism in Post-Modern Countries",
+        "GM62 Welcoming the Stranger in Today's Immigration System",
+        "GM61 Thinking Theologically about Immigration",
+        "GM53 The Unengaged Peoples: Who Will Be the Voice of the Church That Isn't (Yet)?",
+        "GM52 The Unengaged Peoples: Who Are They and Why Should You Care",
+        "GM51 The Unengaged Peoples: What it Takes to Be the First to Tell Them",
+        "GM45 Seek God. Seek Justice.",
+        "GM44 Ending Gendercide and Proclaiming Christ's Redemption in China and India",
+        "GM43 Homosexuality and the Church: A Meditation on the Tragic",
+        "GM42 A Christian Response to Homosexuality",
+        "GM41 Creating Community for At-Risk Children and Youth",
+        "GM33 Embracing your Ethnicity, Empowering Yourself for Missions",
+        "GM32 The Impact of Racial Reconcilation in Missions",
+        "GM31 Â¡Vamonos! Envisioning the Future of Black and Hispanic Mobilization",
+        "GM23 The Environment, a Biblical Responsibility",
+        "GM22 The Environmentalist's Dilemma: Plants or People?",
+        "GM21 Environmental Missions: Bringing Christ the Creator to the Least-Reached",
+        "GM11 Suffering and Faith",
+        "PJ22 Women and Incarnation",
+        "PJ21 The Experimental Orientation: Life in a Slum",
+        "PJ14 Simple Living for Just Giving",
+        "PJ13 Gaining Access to the Pond: Advocacy in Mission",
+        "PJ12 What it Takes to Transform Your City",
+        "PJ11 Connecting with God's Heart for the Poor, the Work of Love and Justice",
+        "PN92 Deny Yourself, But Don't Deny Your Gifts",
+        "PN91 Business as Mission: A New Frontier",
+        "PN75 Being a Strategic Investor in Global Missions",
+        "PN74 Student Ministry in Cuba",
+        "PN73 How to Partner with the Student Ministry in Mexico and Central America",
+        "PN72 Serving and Surviving in the Mission Field in an African Context",
+        "PN71 Missions Opportunities in the Caribbean",
+        "PN54 The Ministry of University Teaching",
+        "PN53 Serving God as a Professor Overseas",
+        "PN52 Reaching and Teaching the Oral World",
+        "PN51 English Language Teaching and Missions: Potential, Pitfalls, and Best Practices",
+        "PN48 What is Drama in Mission?",
+        "PN47 Musicians Living Fully in Christ",
+        "PN46 Worship at Urbana: Why does it look this way?",
+        "PN45 We Have the Best Story: Performing Arts In Mission",
+        "PN44 Is Music Really a \"Universal\" Language?",
+        "PN43 Music Shaping Faith and Practice of the Church",
+        "PN42 Creating Biblically-Based Songs for Oral Cultures",
+        "PN41 Biblical Foundations of Multicultural Worship: Glorfiying God and Impacting the World",
+        "PN32 The Church That Meets In Your House",
+        "PN31 Church Planting Movements",
+        "PN21 Developing World Design: Architects and Engineers in Mission",
+        "PN01 Sports Ministry: Strategic in God's Kingdom Expansion",
+        "MS83 Flourishing and Floundering as a Filmmaker",
+        "MS82 Proclaiming the Gospel through the Arts",
+        "MS81 Where in the Bible Does It Say that God Likes Artists and the Arts?",
+        "MS71 Politics! Why Bother?!",
+        "MS61 Christians in Journalism",
+        "MS53 Women and the Academic Life",
+        "MS52 Serving Christ as a Professor",
+        "MS51 Graduate School for God's Global Mission",
+        "MS34 The Power of Business to Transform",
+        "MS33 Business and Mission: Serving God on Wall Street",
+        "MS32 Vocational Missionaries: Global Mission through Global Business",
+        "MS31 Tentmaking to Create Solutions to Ultrapoverty",
+        "MS30 Microfinance and Missions: How Savings and Small Loans Can Make a Big Difference",
+        "MS29 Listening to Jesus in Corporate America",
+        "MS28 Learning about Business as Mission from the Life of Joseph",
+        "MS27 High Tech Entrepreneurship 101 for the Mission-Minded",
+        "MS26 Why Business Matters to the World and to God",
+        "MS25 The Creative Capacity of Global Business to Bring Transformation",
+        "MS24 Business People and the Church: Why Bother?",
+        "MS23 Business as Mission, A Life Plan",
+        "MS22 Business as Mission: Best and Worst Practices Unplugged",
+        "MS21 At the Intersection of Church and Business: Announcing the Kingdom of God",
+        "MS14 Stories of the Ordinary",
+        "MS13 Advancing the Kingdom Through Your Vocation",
+        "MS12 Mission-Based Ethics for a Challenging World",
+        "MS11 Exploring God's Call to the Marketplace: A Biblical Theology of Work",
+        "MH33 Health Care for Orphaned and Vulnerable Children",
+        "MH32 Healthcare Ministry in Chronic Illness and Disability",
+        "MH31 Health Care Ministry for Exploited and Trafficked People",
+        "MH21 Teaching in the Healthcare Professions as Missions",
+        "MH13 Professional Preparation for Healthcare Missions",
+        "MH12 God's Call to the Healthcare Professional",
+        "MH11 The Biblical Basis of Healthcare Missions",
+        "HS47 The Rest of the Story: Meet the Older Son",
+        "HS46 Christians in Holistic Missions and Community Development",
+        "HS45 The Daily Life of Disciple-Making Disciple",
+        "HS44 Jesus Follower? A Daily Life",
+        "HS43 Contemplative Activism",
+        "HS42 Practicing the Way of Jesus: Taking Action Together",
+        "HS41 Understanding the Concept and Cost of Missions",
+        "HS23 Ethnicity and Prayer",
+        "HS21 Growing Your Prayer Life and Reaching the Campus Community",
+        "HS15 Taking Luke Manuscript Study Back to Campus and Church",
+        "HS14 Theology of Suffering",
+        "HS13 Spiritual Warfare and Mission",
+        "HS12 Reading the Bible with Joy",
+        "HS11 Prayer, Fasting and Worship for Mission",
+        "WR61 Catholics and Protestants in Missional Partnership",
+        "WR51 Paradigms and Questions from the Eastern Orthodox Church",
+        "WR41 Judaism 101",
+        "WR33 Mission to the Hindu World",
+        "WR31 Engaging Your Hindu Neighbor",
+        "WR23 Fresh Vision for the Muslim World",
+        "WR22 Islamic Terrorism and the Arab Spring",
+        "WR21 Islam and Christianity: Tensions and Connections"
+      ];
+      $(document).ready(function(){
+
+        var q = (/q=(\w+)/.exec(location.search)||[null,""])[1];
+        var name = (/n=(\w+)/.exec(location.search)||[null,""])[1];
+
+        if (!(q||name)) { return; }
+        var code_check = parseInt(q.split("z")[0],16);
+        var seminar_numbers = q.split("z")[1].match(/.{1,3}/g)
+
+        var code_check_sum = 0;
+        for (var i=0; i<seminar_numbers.length; i++) {
+          code_check_sum += parseInt(seminar_numbers[i]);
+        }
+        if (code_check_sum != code_check) {
+          $("#name").html("Invalid Parameter");
+          return;
+        }
+
+        $("#name").html(name+" is taking these seminars.");
+        var bookmark_list = $("#bookmarks");
+        for (var i=0; i<seminar_numbers.length; i++) {
+          bookmark_list.append("<li>"+all_titles[parseInt(seminar_numbers[i])]+"</li>")
+        }
+
+        console.log(q);
+        console.log(name);
+        console.log(code_check);
+        console.log(seminar_numbers);
+        console.log("code_check_sum:"+code_check_sum);
+      });
+
+    </script>
+    <style>
+      body {
+        background-color: #222;
+        color: #ddd;
+      }
+      #bookmarks {
+        margin: 0 auto;
+        width: 400px;
+        /*line-height: 1.25em;*/
+      }
+      #bookmarks li {
+        margin: 10px auto;
+      }
+      #name {
+        margin-top: 30px;
+        text-align: center;
+      }
+      #logo {
+        margin: 50px auto;
+        display: block;
+      }
+
+    </style>
+  </head>
+  <body>
+    <div>
+      <h1 id="name">
+      </h1>
+      <ul id="bookmarks">
+      </ul>
+    </div>
+    <img id='logo' src="http://blog.emergingscholars.org/wp-content/uploads/2012/05/urbana_12_logo.png">
+  </body>
+</html>
