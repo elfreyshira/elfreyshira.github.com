@@ -149,7 +149,7 @@
       ];
       $(document).ready(function(){
 
-        var q = (/q=([\w\+]+)/.exec(location.search)||[null,""])[1];
+        var q = (/q=(\w+)/.exec(location.search)||[null,""])[1];
         var name = (/n=([\w\+]+)/.exec(location.search)||[null,""])[1].replace("+"," ");
 
         if (!(q||name)) { return; }
