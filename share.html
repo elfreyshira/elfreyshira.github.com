@@ -150,7 +150,7 @@
       $(document).ready(function(){
 
         var q = (/q=(\w+)/.exec(location.search)||[null,""])[1];
-        var name = (/n=([\w\+%]+)/.exec(location.search)||[null,""])[1].replace("+"," ");
+        var name = (/n=([\w\+%]+)/.exec(location.search)||[null,""])[1].replace(/+|%20/," ");
 
         if (!(q||name)) { return; }
         var code_check = parseInt(q.split("z")[0],16);
