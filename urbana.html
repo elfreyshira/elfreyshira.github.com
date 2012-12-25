@@ -66,6 +66,21 @@
     storage_exists = (typeof(Storage)!=="undefined");
     $(document).ready(function(){
 
+      var just_for_linhao = function() {
+        hi = [];
+        s = $('.seminar h3');
+        str = [];
+        while (hi.length<6){
+          num = Math.floor(Math.random()*141);
+          while (hi.indexOf(num)!=-1) {
+            num = Math.floor(Math.random()*141);
+          }
+          hi.push(num);
+          str.push(s[num].innerText);
+        }
+        alert(str.join("\n"));
+      }
+
       var resize_bookmark_list = function(subtracted_height) {
         $('#bookmark-list').css('height',($(window).height()-subtracted_height).toString()+'px');
       }
