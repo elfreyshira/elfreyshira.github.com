@@ -106,13 +106,13 @@
 
       $("#share").click(function() {
         var name;
-        if(storage_exists && localStorage.urbana_name) {
-          name = localStorage.urbana_name;
+        if(storage_exists && sessionStorage.urbana_name) {
+          name = sessionStorage.urbana_name;
         }
         else {
           name = prompt("What is your name?");
           if(storage_exists) {
-            localStorage.urbana_name = name;
+            sessionStorage.urbana_name = name;
           }
         }
         if (!name) { return; }
@@ -123,8 +123,13 @@
         var check_code = 0;
         for (var i=0; i<selected_bookmarks.length; i++) {
           var this_num_code = titles_map[selected_bookmarks[i].innerText];
-          numeric_code += this_num_code;
+          var this_str_code = "00"+parseInt(this_num_code).toString(16);
+          console.log(this_str_code);
+          this_str_code = this_str_code.substring(this_str_code.length-2,this_str_code.length);
+          console.log(this_str_code);
+          numeric_code += this_str_code;
           check_code += parseInt(this_num_code);
+          console.log(numeric_code);
         }
 
         var numberic_check_code = "0000"+check_code;
