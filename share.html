@@ -1,5 +1,6 @@
 <html>
   <head>
+    <title></title>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js">
     </script>
     
@@ -166,7 +167,8 @@
           return;
         }
 
-        $("#name").html(name+": Seminars of Urbana 2012");
+        $("#name").html(name+": Urbana 2012 Seminars");
+        document.title = name+": Urbana 2012 Seminars";
         var bookmark_list = $("#bookmarks");
         for (var i=0; i<seminar_numbers.length; i++) {
           bookmark_list.append("<li>"+all_titles[parseInt(seminar_numbers[i],16)]+"</li>")
@@ -200,6 +202,24 @@
       }
 
     </style>
+
+    <!-- Google Analytics -->
+  <script type="text/javascript">
+
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-29830971-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+
+  </script>
+
+  <link rel="shortcut icon" href="http://elfreyshira.com/images/favicon.ico" />
+
   </head>
   <body>
     <div>
