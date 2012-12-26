@@ -160,7 +160,7 @@
         var code_check_sum = 0;
         for (var i=0; i<seminar_numbers.length; i++) {
           code_check_sum += parseInt(seminar_numbers[i],16);
-          console.log(parseInt(seminar_numbers[i],16));
+          // console.log(parseInt(seminar_numbers[i],16));
         }
         if (code_check_sum != code_check) {
           $("#name").html("Invalid Parameter");
@@ -180,7 +180,8 @@
         for (var i=0; i<seminar_numbers.length; i++) {
           var this_title = all_titles[parseInt(seminar_numbers[i],16)];
           var matched = "";
-          console.log(this_title);
+          // console.log(this_title);
+          console.log($.trim(this_title));
           if (your_seminars.indexOf($.trim(this_title)) != -1) {
             matched = "<span class='match'>[match]</span> "
           }
