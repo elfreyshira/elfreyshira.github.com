@@ -108,7 +108,7 @@
 
       var delete_img = '<img class="delete" src="x-mark-13.png">';
 
-      resize_bookmark_list(400);
+      resize_bookmark_list(420);
 
       if(storage_exists) {
         if (localStorage) {
@@ -148,7 +148,7 @@
       });
 
       $(window).resize(function() {
-        resize_bookmark_list(400);
+        resize_bookmark_list(420);
       });
 
       $("#share").click(function() {
@@ -390,6 +390,7 @@
       <h3>Bookmarked Seminars</h3>
       <p>
         To bookmark: click on title on right <br>
+        To go to title: click on bookmark <br>
         To delete a bookmark: click the <img src="x-mark-13.png"><br>
         To reset: click <span id='reset' onclick="if (confirm('Are you sure you want to reset your bookmarks?')) {localStorage.clear(); $('.bookmark').remove();}">[here]</span> <br>
         To share: click <span id='share'>[here]</span>
