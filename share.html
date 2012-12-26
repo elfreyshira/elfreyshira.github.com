@@ -157,15 +157,15 @@
         var code_check = parseInt(q.split("z")[0],16);
         var seminar_numbers = q.split("z")[1].match(/.{1,2}/g)
 
-        // var code_check_sum = 0;
-        // for (var i=0; i<seminar_numbers.length; i++) {
-        //   code_check_sum += parseInt(seminar_numbers[i],16);
-        //   // console.log(parseInt(seminar_numbers[i],16));
-        // }
-        // if (code_check_sum != code_check) {
-        //   $("#name").html("Invalid Parameter");
-        //   return;
-        // }
+        var code_check_sum = 0;
+        for (var i=0; i<seminar_numbers.length; i++) {
+          code_check_sum += parseInt(seminar_numbers[i],16);
+          // console.log(parseInt(seminar_numbers[i],16));
+        }
+        if (code_check_sum != code_check) {
+          $("#name").html("Invalid Parameter");
+          return;
+        }
 
         // Checking to see if it matches with what you have
         var your_seminars = [];
