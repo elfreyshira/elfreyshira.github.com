@@ -167,11 +167,24 @@
           return;
         }
 
+        // Checking to see if it matches with what you have
+        var your_seminars = [];
+        for (seminar in localStorage){
+          your_seminars.push($.trim(seminar));   
+        }
+        console.log(your_seminars);
+
         $("#name").html(name+": Urbana 2012 Seminars");
         document.title = name+": Urbana 2012 Seminars";
         var bookmark_list = $("#bookmarks");
         for (var i=0; i<seminar_numbers.length; i++) {
-          bookmark_list.append("<li>"+all_titles[parseInt(seminar_numbers[i],16)]+"</li>")
+          var this_title = all_titles[parseInt(seminar_numbers[i],16)];
+          var matched = "";
+          console.log(this_title);
+          if (your_seminars.indexOf($.trim(this_title)) != -1) {
+            matched = "<span class='match'>[match]</span> "
+          }
+          bookmark_list.append("<li>"+matched+this_title+"</li>")
         }
 
       });
@@ -199,6 +212,9 @@
       #logo {
         margin: 50px auto;
         display: block;
+      }
+      .match {
+        color: #afa;
       }
 
     </style>
