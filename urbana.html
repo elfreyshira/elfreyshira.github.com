@@ -112,8 +112,16 @@
 
       if(storage_exists) {
         if (localStorage) {
+
+
           var bookmarks_list = Object.keys(localStorage);
           for (var i = 0; i < bookmarks_list.length; i++) {
+
+            // Fix broken id values that say true instead of something like EV31
+            if (localStorage[bookmarks_list[i]] == "true") {
+              localStorage[bookmarks_list[i]] = bookmarks_list[i].split(" ")[0];
+            }
+
             var title = bookmarks_list[i];
             if (title=="urbana_name"){ continue; }
             var new_bookmark = $('<li class="bookmark">'+delete_img+'<a href="#'+localStorage[bookmarks_list[i]]+'" class="b_title">'+title+'</a></li>');
@@ -163,12 +171,12 @@
         for (var i=0; i<selected_bookmarks.length; i++) {
           var this_num_code = titles_map[selected_bookmarks[i].innerText];
           var this_str_code = "00"+parseInt(this_num_code).toString(16);
-          console.log(this_str_code);
+          // console.log(this_str_code);
           this_str_code = this_str_code.substring(this_str_code.length-2,this_str_code.length);
-          console.log(this_str_code);
+          // console.log(this_str_code);
           numeric_code += this_str_code;
           check_code += parseInt(this_num_code);
-          console.log(numeric_code);
+          // console.log(numeric_code);
         }
 
         var numberic_check_code = "0000"+check_code;
@@ -189,6 +197,14 @@
           delete localStorage[title];
         }
       };
+
+      // var mis_id_bookmarks = $('.bookmark a[href="#true"]');
+      // if (mis_id_bookmarks.length) {
+      //   mis_id_bookmarks.
+      // }
+      // else {
+      //   console.log("nope");
+      // }
       
     });
 
@@ -374,7 +390,7 @@
       <h3>Bookmarked Seminars</h3>
       <p>
         To bookmark: click on title on right <br>
-        To delete bookmark: click on title below <br>
+        To delete a bookmark: click the <img src="x-mark-13.png"><br>
         To reset: click <span id='reset' onclick="if (confirm('Are you sure you want to reset your bookmarks?')) {localStorage.clear(); $('.bookmark').remove();}">[here]</span> <br>
         To share: click <span id='share'>[here]</span>
 
