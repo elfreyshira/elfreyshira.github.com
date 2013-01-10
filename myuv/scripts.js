@@ -61,7 +61,7 @@ $(document).ready(function() {
       });
     },
     delay: 10,
-    minLength: 3,
+    minLength: 1,
     position: {
       my: "top",
       at: "center bottom"
