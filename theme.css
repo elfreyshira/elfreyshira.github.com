@@ -53,9 +53,10 @@ header {
   float: left;
   margin: 0.3125em;
   height: 25em;
-  width: 12.5em;
+  width: 12.44em;
   border: 0.0625em solid #999;
   opacity: 0.3;
+  background-size: 25.75em 21.75em;
   -moz-opacity: 0.3;
   filter:alpha(opacity=3);
 }
@@ -73,12 +74,14 @@ header {
   }
 
 .bg_img {
+  background-size: 25.75em;
+
   position: relative;
   float: left;
-  margin-left: -12.875em;
-  margin-top: 3.375em;
+  margin-left: -12.84em;
+  margin-top: 4.9em;
   width: 12.5em;
-  height: 21.75em;
+  height: 20.5em;
   opacity: 0.5;
   -moz-opacity: 0.5;
   filter:alpha(opacity=5);

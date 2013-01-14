@@ -35,10 +35,10 @@ $(document).ready(function() {
       var second = first_and_second[1];
 
       $(first).css({
-        backgroundPosition: "0px"
+        backgroundPosition: "0em"
       })
       $(second).css({
-        backgroundPosition: "-212px"
+        backgroundPosition: "-13.25em"
       });
       $(first+", "+second).stop().css({backgroundImage:"url('images/"+link_text+".png')"
         }).animate({opacity:1.0},150);
