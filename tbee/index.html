@@ -1,54 +1,77 @@
 <html>
-
 <head>
+<title> The Best Event Ever</title>
 
-<title>
-  The Best Event Ever
-</title>
+<link href='http://fonts.googleapis.com/css?family=Vollkorn' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Pinyon+Script' rel='stylesheet' type='text/css'>
 
-<style>
-  
+<style>    
   body {
-    font-family: Helvetica, sans-serif;
-    background-image: url("groovepaper.png");
-    background-repeat: repeat;
-    padding-top: 40px;
-    padding-bottom: 40px;
-    color: #333;
+    font-family:"Times New Roman", Georgia, Times, serif; 
+    /*font-family: Helvetica, sans-serif;*/    
+    background-image: url("groovepaper.png");    
+    background-repeat: repeat;    
+    padding-top: 40px;    
+    padding-bottom: 40px;    
+    color: #333;  
   }
-  #details {
-    margin: 0 30px 0 550px;
+    
+  h1 {
+      font-family: 'Vollkorn', serif;
+    }
+    
+    h2 {    
+      font-family: 'Vollkorn', serif;
+    }
+    
+     h3 {         
+     
+      font-family: 'Pinyon Script', cursive;
+
+    }
+          
+  #details {    
+    /*margin: 0 30px 0 50px;    */
     min-width: 500px;
+  }  
+  
+  #stream-container {
+    width: 500px;
+    margin: 0 auto;
   }
-  #stream {
-    float: left;
-    border: 3px solid #333;
+  #stream {    
+    /*align: middle;*/
+    border: 3px solid #333;    
     border-radius: 2px;
-
-  }
-  a {
-    color: #6C86BD;
-  }
+    /*margin-left: 350px;*/
+    }  
+  a {    
+      color: #d81417; <!--#6C86BD--> 
+      }
 </style>
-
 </head>
-
 <body>
-
-  <iframe src="http://up.massrelevance.com/massrel-products/mass-streams-5/index.html?config=elfreyshira/the-best-event-ever-single-stream" frameborder="0" width="500px" height="700px" style="overflow-x: none; overflow-y: none; " allowtransparency="true" scrolling="auto" id="stream"></iframe>
 
 
   <div id="details">
-    <h1> You are invited! </h1>
-    <h1> RSVP <a target="_blank" href="http://www.facebook.com/events/249918861808476">on Facebook</a>. </h1>
-    <h1> Tweet your images and excitement using <a target="_blank" href="http://clicktotweet.com/8LQFC">#tbee</a>. </h1>
-    <h1> Date: March 23, 2013 </h1>
-    <h1> Time: TBA </h1>
-    <h1> Location: Undisclosed </h1>
+    <h3 align="center"> <font size="6"> You are invited to... </font></h3>
+    <h1 align="center"> <font size="7">THE BEST EVENT EVER </font> </h1>
+    <h3 align="center"> <font size="7"> March 23, 2013 </font> <h3>               
+    <h2 align="center"> <a target="_blank" href="http://www.facebook.com/events/249918861808476">RSVP</a> <a target="_blank" href="http://clicktotweet.com/8LQFC">#tbee</a> </h2>       
+  
+  <div id="stream-container">
+
+    <iframe src="http://up.massrelevance.com/massrel-products/mass-streams-5/index.html?config=elfreyshira/the-best-event-ever-single-stream"    
+      frameborder="0"
+      width="500px" height="700px"
+      style="overflow-x: none; overflow-y: none; " 
+      allowtransparency="true" 
+      scrolling="auto" 
+      id="stream"
+      align="center">
+    </iframe>
   </div>
 
 
-
 </body>
-
-</html>
+</html><!-- content to be placed inside <body>…</body> -->
