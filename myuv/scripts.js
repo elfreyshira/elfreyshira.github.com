@@ -13,6 +13,11 @@ year = false;
 
 $(document).ready(function() {
 
+  // Making sure the favorites are set
+  if (!localStorage.myuv_favorites) {
+    localStorage.myuv_favorites = "[]";
+  }
+
   $(".cover, .loader").hide();
   $("#search").attr("placeholder","movie name -> press enter");
 
@@ -521,8 +526,10 @@ function fill_output(display_title, source_classes, source_names, scores, out_of
     }
   };
   final_output += ' </div>\n\
-    <div class="movie_footer"> <p>' + display_title +'</p> </div> \n\
-    </div>';
+    <div class="movie_footer"> <p>' + display_title
+    + '</p> <span class="fav-button" data-movie="'
+    + display_title.strip_html()
+    + '"></span></div></div>';
   var output_html = $(final_output);
 
 
@@ -571,8 +578,29 @@ function fill_output(display_title, source_classes, source_names, scores, out_of
                                                            backgroundColor: bg_color_css,
                                                            borderColor: border_color_css });
 
+
   };
 
+
+  var favs_str = localStorage.myuv_favorites;
+  var favs_arr = JSON.parse(favs_str);
+
+  //check to see if the title is already a favorite
+  if (favs_arr.indexOf(display_title.strip_html()) >= 0) {
+    output_html.find(".fav-button").removeClass("fav-button").addClass("fav-button-clicked");
+  }
+
+  //setting the favorite button listener
+  output_html.find(".fav-button").click(function() {
+    var clicked_title = $(this).attr("data-movie");
+    if (favs_arr.indexOf(clicked_title) < 0) {
+      favs_arr.push(clicked_title);
+    }
+    localStorage.myuv_favorites = JSON.stringify(favs_arr);
+
+    $(this).removeClass("fav-button").addClass("fav-button-clicked");
+
+  });
 
 
   output_html.hide();
@@ -584,4 +612,11 @@ function fill_output(display_title, source_classes, source_names, scores, out_of
   //   // $(this).parent().find(".source").slideToggle();
   //   $(this).parent().slideToggle();
   // });
+}
+
+//filling up the favorites
+$(".favorites").html(JSON.parse(localStorage.myuv_favorites).join("<br>"));
+
+String.prototype.strip_html = function() {
+  return this.replace(/<(?:.|\n)*?>/gm, '');
 }

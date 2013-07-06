@@ -152,4 +152,35 @@ footer {
     background-image: radial-gradient(center, circle farthest-corner, #D8C2FF 0%, #FAFAFA 100%);
   }
 
+.fav-button {
+  background-image: url("heart.png");
+  float: right;
+  width: 16px;
+  height: 16px;
+  /*background-color: red;*/
+  margin-top: -20px;
+  margin-left: 5px;
+  display: block;
+  position: absolute;
+  transition: .3s background-image;
+}
+.fav-button:hover {
+  background-image: url("heart-hover.png");
+  cursor: pointer;
+}
+.fav-button-clicked {
+  float: right;
+  width: 16px;
+  height: 16px;
+  /*background-color: red;*/
+  margin-top: -20px;
+  margin-left: 5px;
+  display: block;
+  position: absolute;
+  background-image: url("heart-hover.png");
+}
 
+.favorites {
+  width: 600px;
+  margin: 0 auto;
+}
