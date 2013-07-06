@@ -1,5 +1,9 @@
-// ****************
-// make it where it calls everything at once.
+
+///////////////////////////
+String.prototype.strip_html = function() {
+  return this.replace(/<(?:.|\n)*?>/gm, '');
+}
+///////////////////////
 
 // http://www.deanclatworthy.com/imdb/
 have_searched = false;
@@ -11,12 +15,17 @@ movie_title = false;
 display_title = false;
 year = false;
 
+
+
 $(document).ready(function() {
 
   // Making sure the favorites are set
   if (!localStorage.myuv_favorites) {
     localStorage.myuv_favorites = "[]";
   }
+  
+  //filling up the favorites
+  $(".favorites").html(JSON.parse(localStorage.myuv_favorites).join("<br>"));
 
   $(".cover, .loader").hide();
   $("#search").attr("placeholder","movie name -> press enter");
@@ -525,6 +534,8 @@ function fill_output(display_title, source_classes, source_names, scores, out_of
       percentages[i] = parseFloat(scores[i])/parseFloat(out_of[i].split(" ")[1]);
     }
   };
+  console.log(typeof display_title)
+  console.log(display_title);
   final_output += ' </div>\n\
     <div class="movie_footer"> <p>' + display_title
     + '</p> <span class="fav-button" data-movie="'
@@ -614,9 +625,3 @@ function fill_output(display_title, source_classes, source_names, scores, out_of
   // });
 }
 
-//filling up the favorites
-$(".favorites").html(JSON.parse(localStorage.myuv_favorites).join("<br>"));
-
-String.prototype.strip_html = function() {
-  return this.replace(/<(?:.|\n)*?>/gm, '');
-}
