@@ -390,14 +390,12 @@ function do_rt() {
 function do_tmdb() {
   var search_url;
   if (imdb_id) {
-    search_url = "http://api.themoviedb.org/2.1/Movie.imdbLookup/en/json/bb0d9620f620e8097998203a8af18aec/"+
-                    imdb_id;
+    search_url = "http://api.themoviedb.org/3/movie/" + imdb_id + "?api_key=bb0d9620f620e8097998203a8af18aec"
   }
   else {
-    search_url = "http://api.themoviedb.org/2.1/Movie.search/en/json/bb0d9620f620e8097998203a8af18aec/"+
-                    title_url;
+    search_url = "http://api.themoviedb.org/3/search/movie?api_key=bb0d9620f620e8097998203a8af18aec&query=" + title_url
     if (year) {
-      search_url = search_url + "+" + year;
+      search_url = search_url + "&year=" + year;
     }
   }
   $.ajax({
@@ -406,18 +404,37 @@ function do_tmdb() {
     dataType: 'jsonp',
     timeout: 5000,
     success: function(data){
-      if (data.length > 0 && data[0].rating){
-        if (!year || !movie_title) {
-          year = data[0].released.split("-")[0];
-          movie_title = data[0].name;
-          display_title = movie_title + " <span class='dem'>(" + year + ")</span>";
-        }
-        source_classes[count] = "tmdb";
-        source_names[count] = "The Movie DB";
-        scores[count] = data[0].rating;
-        out_of[count] = "/ 10";
-        count += 1;
+
+      var vote_average;
+      if (data.results && data.results.length > 0) {
+        vote_average = data.results[0].vote_average
       }
+      else if (data.vote_average) {
+        vote_average = data.vote_average;
+      }
+      else {
+        return;
+      }
+
+      source_classes[count] = "tmdb";
+      source_names[count] = "The Movie DB";
+      scores[count] = vote_average;
+      out_of[count] = "/ 10";
+      count += 1;
+      // if (data.length > 0 && data[0].rating){
+      //   if (!year || !movie_title) {
+      //     year = data[0].released.split("-")[0];
+      //     movie_title = data[0].name;
+      //     display_title = movie_title + " <span class='dem'>(" + year + ")</span>";
+      //   }
+        // source_classes[count] = "tmdb";
+        // source_names[count] = "The Movie DB";
+        // scores[count] = data[0].rating;
+        // out_of[count] = "/ 10";
+        // count += 1;
+      // }
+
+
     },
     error: function(crap){
       // alert("RT fail");
